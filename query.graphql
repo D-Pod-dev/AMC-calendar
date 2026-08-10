@@ -1,0 +1,52 @@
+query TheatreSelectModalQuery($resultCount: Int = 10) {
+  viewer {
+    location(query: "washington", first: $resultCount) {
+      edges {
+        node {
+          ...TheatreSelectResult
+        }
+      }
+    }
+  }
+}
+
+fragment TheatreSelectTheatre on Theatre {
+  name
+  theatreId
+  slug
+  marketSlug
+  isSelected
+  longName
+  secondaryLongName
+  addressLine1
+  addressLine2
+  city
+  state
+  stateCode
+  postalCode
+  latitude
+  longitude
+  distance
+  brand
+  attributes(type: FILTERS, first: 4) {
+    edges {
+      node {
+        name
+        id
+      }
+    }
+  }
+}
+
+fragment TheatreSelectResult on Location {
+  title
+  latitude
+  longitude
+  theatres {
+    edges {
+      node {
+        ...TheatreSelectTheatre
+      }
+    }
+  }
+}

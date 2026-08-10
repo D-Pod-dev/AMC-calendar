@@ -12,12 +12,14 @@ I'm not a huge fan of AMC Theatres' existing UI, which requires you to click thr
  - **`requests`:** Downloads website pages.
     ```python
     import requests
+
     html = requests.get(url).text
     ```
 
  - **`BeautifulSoup`:** Parses HTML. (`lxml` is the html parser being used)
     ```python
     from bs4 import BeautifulSoup
+
     soup = BeautifulSoup(html, "lxml")
     ```
 
