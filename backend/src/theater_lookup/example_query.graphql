@@ -1,6 +1,6 @@
 query TheatreSelectModalQuery($resultCount: Int = 10) {
   viewer {
-    location(query: "washington", first: $resultCount) {
+    location(query: "new york", first: $resultCount) {
       edges {
         node {
           ...TheatreSelectResult
