@@ -5,7 +5,6 @@ description = ""
 authors = [
     {name = "Daniel Podnozov",email = "137218728+D-Pod-dev@users.noreply.github.com"}
 ]
-readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "notebook (>=7.6.0,<8.0.0)",
@@ -13,6 +12,9 @@ dependencies = [
     "requests (>=2.34.2,<3.0.0)",
     "beautifulsoup4 (>=4.15.0,<5.0.0)",
 ]
+
+[tool.poetry]
+package-mode = false
 
 
 [build-system]
