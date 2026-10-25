@@ -10,15 +10,16 @@
 <body>
     <main>
         <h1>AMC Calendar</h1>
-        <form id="theatre-lookup-form">
+        <div id="theatre-lookup-form">
             <label for="query-input">Search for a theatre:</label>
             <input id="query-input" name="query" type="text" placeholder="Search by zip code, city, or theatre">
-            <button type="submit">Search</button>
+            <button onclick="lookupTheatres(document.getElementById('query-input').value)">Search</button>
     
             <p id="status-message"></p>
             <section id="theatre-results"></section>
-        </form>
+        </div>
         
+
     </main>
 
     <script src="js/main.js"></script>

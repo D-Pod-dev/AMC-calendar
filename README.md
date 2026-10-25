@@ -40,6 +40,9 @@ Once the installation is completed, run the program using:
 poetry run uvicorn src.main:app --reload
 ```
 
+### `run.bat`
+This file lets you run the app from the root directory without having to cd into `/backend`, given that you already have all the prerequisites installed.
+
 Then open http://127.0.0.1:8000/ in your browser to see the webpage, or http://127.0.0.1:8000/docs for api documentation.
 
 

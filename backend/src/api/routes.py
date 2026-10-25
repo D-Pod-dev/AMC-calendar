@@ -2,6 +2,6 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
-@router.get("/api")
-async def test():
-    pass
+@router.get("/api/test")
+async def test(query:str):
+    return {"message": f"API works! Query: {query}"}
