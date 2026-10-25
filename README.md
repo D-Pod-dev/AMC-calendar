@@ -3,6 +3,46 @@ A web scraper-based calendar for AMC Theatres' movie showtimes.
 
 I'm not a huge fan of AMC Theatres' existing UI, which requires you to click through every single day to browse showtimes. Through web scraping, every page can be fetched in advance to create a structured calendar-like UI.
 
+## Running the app
+### Requirements
+#### Python (version 3.13 or newer)
+Download python at https://www.python.org/downloads/ and enable `Add python.exe to PATH` when installing
+
+Make sure to confirm installation with:
+```powershell
+python --version
+```
+#### Poetry (python package manager)
+Go to https://python-poetry.org/docs/#installation/ and follow installation instructions.
+
+Make sure to confirm installation with:
+```powershell
+poetry --version
+```
+### Clone repository
+```
+git clone https://github.com/D-Pod-dev/AMC-calendar.git
+```
+### Install dependencies & run program
+Move into **the backend folder.**
+```
+cd AMC-calendar/backend
+```
+**This is important!** If you move into the root, you will not be able to run the local server.
+
+Once in the backend directory, run this to install dependencies:
+```
+poetry install
+```
+
+Once the installation is completed, run the program using:
+```
+poetry run uvicorn src.main:app --reload
+```
+
+Then open http://127.0.0.1:8000/ in your browser to see the webpage, or http://127.0.0.1:8000/docs for api documentation.
+
+
 ## Project Structure
 ```
 AMC-calendar
@@ -19,7 +59,11 @@ AMC-calendar
 |  |  models
 |  |  |  showtimes.py      # Pydantic models, if i need them
 |  frontend
-|  |  [TBD]       # we'll burn that bridge when we get there
+|  |  index.html           # main page for now (idk if i'll even need more tbh)
+|  |  style.css            # page look pretty 🥰
+|  |  js                   # JavaSlop goes here /j kidding love you js
+|  |  |  main.js           # main logic, connects page to api
+|  |  |  api.js            # connects frontend to backend
 ```
 
 ## Toolset
@@ -54,5 +98,5 @@ If the webpage's contents are loaded using js, not static html.
 
 #### FastAPI:
 Connecting python script to JS.
- - **`fastapi`:** exposes scraped data as an api endpoint.
- - **`uvicorn`:** "run the FastAPI server."
+ - **`fastapi`:** exposes scraped data as an api endpoint. ✅
+ - **`uvicorn`:** runs the FastAPI server.

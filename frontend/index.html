@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMC Calendar</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <main>
+        <h1>AMC Calendar</h1>
+        <form id="theatre-lookup-form">
+            <label for="query-input">Search for a theatre:</label>
+            <input id="query-input" name="query" type="text" placeholder="Search by zip code, city, or theatre">
+            <button type="submit">Search</button>
+    
+            <p id="status-message"></p>
+            <section id="theatre-results"></section>
+        </form>
+        
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
