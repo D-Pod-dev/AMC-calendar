@@ -1,7 +1,9 @@
+import asyncio
 import json
 import textwrap
 
 import requests
+from playwright.async_api import async_playwright
 
 
 class TheatreLookupQueryHandler:
@@ -18,6 +20,7 @@ class TheatreLookupQueryHandler:
         #       Accessibility - eg. "Wheelchair Ramps", "Open Caption (On-Screen Subtitles)"
         theatre_attribute_fields: None | list[str] = None, # requested information about each theatre attribute
     ) -> None:
+                
         if location_fields is None:
             location_fields = ["title", "latitude", "longitude"]
 
@@ -104,8 +107,50 @@ class TheatreLookupQueryHandler:
               )}
             }}""")
 
+    async def get_cookies(self):
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=True)
+
+            context = await browser.new_context()
+            page = await context.new_page()
+
+            await page.goto("https://amctheatres.com")
+
+            await page.wait_for_timeout(5000)
+
+            cookies = await context.cookies()
+            
+            await browser.close()
+
+            return cookies
+
     def send_query(self, search_query: str, result_count: int | None = None):
-        result = requests.post(
+        session = requests.Session()
+        session.get("https://amctheatres.com")
+
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/141.0.0.0 Safari/537.36"
+            ),
+            "Accept": "*/*",
+            "Content-Type": "application/json",
+            "Origin": "https://www.amctheatres.com",
+            "Referer": "https://www.amctheatres.com/",
+        }
+
+        # playwright_cookies = await asyncio.run(self.get_cookies())
+
+        # for cookie in playwright_cookies:
+        #     session.cookies.set(
+        #         cookie["name"],
+        #         cookie["value"],
+        #         domain=cookie.get("domain"),
+        #         path=cookie.get("path", "/")
+        #     )
+
+        result = session.post(
             "https://graph.amctheatres.com/",
             json={
                 "query": self.build_query(),
@@ -116,6 +161,7 @@ class TheatreLookupQueryHandler:
                     }
                 ),
             },
+            headers=headers
         )
         
         # print(json.dumps(result.json(), indent=2))
