@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-package-mode = false
+packages = [{include = "src"}]
 
 
 [build-system]
