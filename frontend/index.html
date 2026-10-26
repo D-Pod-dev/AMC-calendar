@@ -10,18 +10,19 @@
 <body>
     <main>
         <h1>AMC Calendar</h1>
-        <div id="theatre-lookup-form">
+        <div id="theatre-lookup">
             <label for="query-input">Search for a theatre:</label>
             <input id="query-input" name="query" type="text" placeholder="Search by zip code, city, or theatre">
             <button onclick="lookupTheatres(document.getElementById('query-input').value)">Search</button>
-    
-            <p id="status-message"></p>
+            <hr>
+            <div id="status-message"></div>
             <section id="theatre-results"></section>
         </div>
         
 
     </main>
 
-    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js" integrity="sha512-OVq+Gfa9PIjbTC0jWOccSFSp/vzkBQ5pMcbHQrNZLl+izmdFmusmAMlX4LT550ivvSnMXMEeG7CxEtjIz6Dn2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="main.js"></script>
 </body>
 </html>

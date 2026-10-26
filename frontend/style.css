@@ -2,3 +2,9 @@
     background-color: black;
     color: white;
 }
+
+#status-message {
+    font-family: Consolas, Courier New, monospace;
+    color: lightgray;
+    font-size: 0.85rem;
+}

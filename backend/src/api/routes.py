@@ -1,7 +1,13 @@
 from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
-@router.get("/api/test")
-async def test(query:str):
-    return {"message": f"API works! Query: {query}"}
+@router.get("/api/theatre-lookup")
+async def theatre_lookup(query:str):
+    
+    
+    return JSONResponse(
+        status_code=200,
+        content={"message": query}
+    )
