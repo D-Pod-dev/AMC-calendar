@@ -8,12 +8,12 @@ from .api.routes import router
 app = FastAPI()
 
 # deployment debugging
-print("\n".join(
-    [f"cwd: {os.getcwd()}",
-     f"__file__: {__file__}",
-     f"frontend exists: {Path('../frontend').exists()}",
-     f"resolved: {Path('../frontend').resolve()}"]
-))
+frontend_dir = Path(__file__).parent[2]
+
+print("\n".join([
+    f"frontend_dir: {frontend_dir}",
+    f"exists: {frontend_dir.exists()}"
+]))
 
 app.include_router(router)
-app.frontend("/", directory="../frontend")
+app.frontend("/", directory=frontend_dir)
