@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "src"}]
+packages = [{include = "src", from = "backend"}]
 
 [tool.vercel]
 entrypoint = "backend.src.main:app"
