@@ -19,6 +19,8 @@ dependencies = [
 [tool.poetry]
 packages = [{include = "src"}]
 
+[tool.vercel]
+entrypoint = "backend.scr.main:app"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
