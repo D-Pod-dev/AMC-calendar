@@ -8,7 +8,7 @@ from .api.routes import router
 app = FastAPI()
 
 # deployment debugging
-frontend_dir = Path(__file__).parent[2]
+frontend_dir = Path(__file__).parents[2]
 
 print("\n".join([
     f"frontend_dir: {frontend_dir}",
