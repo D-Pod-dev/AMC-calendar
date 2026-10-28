@@ -23,28 +23,38 @@ poetry --version
 ```
 git clone https://github.com/D-Pod-dev/AMC-calendar.git
 ```
-### Install dependencies & run program
-Move into **the backend folder.**
-```
-cd AMC-calendar/backend
-```
-**This is important!** If you move into the root, you will not be able to run the local server.
 
-Once in the backend directory, run this to install dependencies:
+### Install dependencies
+Run this to install dependencies:
 ```
 poetry install
 ```
 
-Once the installation is completed, run the program using:
+### Quick run
+Premade scripts in the project root contain the command to the program (described in next section).
+
+#### Windows - `run.bat`
+Just running the file will launch the app. Run the script in Command Prompt or PowerShell with the following command:
+```cmd
+run.bat
 ```
-poetry run uvicorn src.main:app --reload
+
+#### Unix-based systems (MacOS, Linux) - `run.sh`
+This is a bit more complicated. First you need to **allow** the batch file to run:
+```bash
+chmod +x run.sh
+```
+Once you've done that, you can just run the file with the following command:
+```bash
+./run.sh
 ```
 
-### `run.bat`
-This file lets you run the app from the root directory without having to cd into `/backend`, given that you already have all the prerequisites installed.
-
-Then open http://127.0.0.1:8000/ in your browser to see the webpage, or http://127.0.0.1:8000/docs for api documentation.
-
+### Manually run program
+Once the installation is completed, you can run the program using this command:
+```
+poetry run uvicorn backend.src.main:app --reload --reload-dir . --reload-include "*.html" --reload-include "*.js" --reload-include "*.css"
+```
+Long options (`--reload`, `--reload-dir`, `--reload-include`) are there so the app automatically updates when files are updated.
 
 ## Project Structure
 ```
@@ -62,11 +72,10 @@ AMC-calendar
 |  |  models
 |  |  |  showtimes.py      # Pydantic models, if i need them
 |  frontend
-|  |  index.html           # main page for now (idk if i'll even need more tbh)
+|  |  index.html           # main page for now
 |  |  style.css            # page look pretty 🥰
-|  |  js                   # JavaSlop goes here /j kidding love you js
-|  |  |  main.js           # main logic, connects page to api
-|  |  |  api.js            # connects frontend to backend
+|  |  main.js              # main logic, connects page to api
+
 ```
 
 ## Toolset
