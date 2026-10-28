@@ -9,27 +9,23 @@ function displayStatus(statusCode) {
         };">${statusCode}</span> | ${HttpStatusCode[statusCode]}`;
 };
 
+function displayTheatreResults(results) {
+    document.getElementById('theatre-results').innerHTML = results
+};
+
 async function lookupTheatres(query) {
     const response = await fetch(`/api/theatre-lookup?${new URLSearchParams({ query })}`);
-    console.log(response);
     
     const data = await response.json();
-    console.log(data);
-
     
     // render color-coded status code
     displayStatus(response.status);
     
-    console.log(response);
-
     // report result of API call
     if (response.ok) {
-        document.getElementById('theatre-results').innerHTML = 
-        `<br><b>API Works! | Query: </b> ${data.message}`;
+        displayTheatreResults(data);
     } else {
-        document.getElementById('theatre-results').innerHTML = 
-        "<br><b>API Error! Response: </b><br>"+
-        `<pre><code>${data.detail}</code></pre>`;
+        displayTheatreResults(`<pre><code>${data.detail}</code></pre>`);
     };
 };
 

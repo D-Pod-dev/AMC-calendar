@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from fastapi.responses import JSONResponse
+from fastapi.exceptions import HTTPException
 from requests.exceptions import HTTPError
 
 from ..theatre_lookup.query_handler import TheatreLookupQueryHandler
@@ -11,15 +11,14 @@ async def theatre_lookup(query:str):
     query_handler = TheatreLookupQueryHandler()
 
     try:
-        result = query_handler.send_query(search_query=query)        
-        return result
+        return query_handler.send_query(search_query=query)
     except HTTPError as e:
-        return JSONResponse(
+        raise HTTPException(
             status_code=e.response.status_code,
-            content={"detail": f"Theatre lookup failed: {e.response.text}"}
+            detail=str(e)
         )
     except Exception as e:  # noqa: BLE001
-        return JSONResponse(
+        raise HTTPException(
             status_code=500,
-            content={"detail" :str(e)}
+            detail=str(e)
         )
