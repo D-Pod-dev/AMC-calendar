@@ -9,8 +9,8 @@ function displayStatus(statusCode) {
         };">${statusCode}</span> | ${HttpStatusCode[statusCode]}`;
 };
 
-function displayTheatreResults(results) {
-    document.getElementById('theatre-results').innerHTML = results
+function displayTheatreResults(data) {
+    document.getElementById('theatre-results').innerHTML = data;
 };
 
 async function lookupTheatres(query) {
