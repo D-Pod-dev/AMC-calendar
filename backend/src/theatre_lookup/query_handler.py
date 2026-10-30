@@ -3,7 +3,6 @@ import json
 import textwrap
 
 import requests
-from playwright.async_api import async_playwright
 
 
 class TheatreLookupQueryHandler:
@@ -106,23 +105,6 @@ class TheatreLookupQueryHandler:
                   ]
               )}
             }}""")
-
-    async def get_cookies(self):
-        async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
-
-            context = await browser.new_context()
-            page = await context.new_page()
-
-            await page.goto("https://amctheatres.com")
-
-            await page.wait_for_timeout(5000)
-
-            cookies = await context.cookies()
-            
-            await browser.close()
-
-            return cookies
 
     def send_query(self, search_query: str, result_count: int | None = None):
         session = requests.Session()
