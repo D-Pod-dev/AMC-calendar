@@ -13,10 +13,15 @@
         <div id="theatre-lookup">
             <label for="query-input">Search for a theatre:</label>
             <input id="query-input" name="query" type="text" placeholder="Search by zip code, city, or theatre">
-            <button onclick="lookupTheatres(document.getElementById('query-input').value)">Search</button>
+            <button id="theatre-search-button" onclick="lookupTheatres(document.getElementById('query-input').value)">Search</button>
             <hr>
-            <div id="status-message"></div>
+            <div id="status-message">--- | N/A</div>
             <br>
+            <details>
+                <summary>Debug Data</summary>
+                <br>
+                <pre><code id="theatre-debug-data"></code></pre>
+            </details>
             <section id="theatre-results"></section>
         </div>
         
