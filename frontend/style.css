@@ -10,8 +10,21 @@
 }
 
 code {
+    display: block;
     padding: 0.75rem;
+    margin: 0/75rem;
     color: lightgray;
     background-color: rgb(35,35,35);
     border-radius: 3px;
+}
+
+pre {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-width: 100%;
+    max-height: 50%;
+}
+
+#theatre-list {
+    margin-left: 1rem;
 }

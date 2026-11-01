@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 from xml.dom import minidom
 
 import requests
+from rapidfuzz import fuzz
 
 SITEMAP_THEATRES_XML = None
 theatres_dict = None
@@ -13,9 +14,10 @@ def print_xml(xml):
         ET.dump(xml)
         # print(minidom.parseString(ET.tostring(xml, encoding="unicode")).toprettyxml(indent=" "*2))
 
-def get_theatres():
+def lookup_theatres(query: str, search_by:str, count: int = 10):
     global SITEMAP_THEATRES_XML, theatres_dict
 
+    # load theatres if not loaded yet
     if SITEMAP_THEATRES_XML is None:
         SITEMAP_THEATRES_XML = ET.fromstring(requests.get("https://www.amctheatres.com/sitemaps/sitemap-theatres.xml").text)
         ET.indent(SITEMAP_THEATRES_XML, space=" "*2)
@@ -26,6 +28,13 @@ def get_theatres():
 
         theatres_dict = [{"url": url[0].text, **{attr.get("name"): attr.text for attr in url.findall(".//Attribute")}} for url in SITEMAP_THEATRES_XML]
 
-    return theatres_dict
+    matches = sorted(
+        theatres_dict,
+        key=lambda theatre:
+            fuzz.token_set_ratio(
+                query.lower(), theatre[search_by].lower()),
+            reverse=True)
+
+    return matches[:count]
 
 # print_xml(get_theatre_list())

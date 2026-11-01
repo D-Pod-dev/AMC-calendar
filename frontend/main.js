@@ -21,7 +21,7 @@ function displayStatus(statusCode) {
 };
 
 function displayDebugData(data) {
-    document.getElementById('theatre-debug-data').textContent = data;
+    document.getElementById('theatre-debug-data').textContent = JSON.stringify(data, null, 2);
 };
 
 function indicateSearching() {
@@ -42,11 +42,19 @@ function resetTheatreSearchButton() {
     searchButton.textContent = defaultTheatreSearchButtonText;
 }
 
-async function lookupTheatres(query) {
+function displayTheatreResults(theatres) {
+    let resultsContainer = document.getElementById('theatre-results');
+    resultsContainer.innerHTML = "<h2>Theatre Results:</h2>"+"<div id='theatre-list'>"+theatres.map(theatre => `<b><a href="${theatre.url}">${theatre.title}</a></b> - ${theatre.city[0].toUpperCase()+theatre.city.slice(1).toLowerCase()}`).join('<br><br>')+"</div>";
+}
+
+async function lookupTheatres() {
+    let query = document.getElementById('query-input').value;
+    let searchBy = document.getElementById('search-by-input').value;
+    
     let loadingTimeout = indicateSearching();
     displayDebugData();
 
-    const response = await fetch(`/api/theatre-lookup?${new URLSearchParams({ query })}`);
+    const response = await fetch(`/api/theatre-lookup?${new URLSearchParams({ query, searchBy})}`);
     
     const data = await response.json();
     
@@ -58,6 +66,7 @@ async function lookupTheatres(query) {
     // report result of API call
     if (response.ok) {
         displayDebugData(data);
+        displayTheatreResults(data);
     } else {
         displayDebugData(data.detail);
     };
@@ -66,6 +75,6 @@ async function lookupTheatres(query) {
 // make enter key submit search
 document.getElementById('query-input').addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        lookupTheatres(document.getElementById('query-input').value);
+        lookupTheatres();
     };
 });
