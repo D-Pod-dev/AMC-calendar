@@ -79,7 +79,7 @@ async function lookupTheatres() {
     let query = document.getElementById('query-input').value;
     let searchBy = document.getElementById('search-by-input').value;
     let resultCount = document.getElementById('theatre-result-count').value;
-    
+
     let loadingTimeout = indicateSearching();
     displayDebugData();
 
