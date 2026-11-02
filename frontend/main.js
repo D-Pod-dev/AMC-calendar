@@ -58,24 +58,32 @@ function displayTheatreResults(theatres) {
                 (index === 0 || theatres[index-1].ratio > 60))
                 ? ("<div id='theatre-results-divider'>"
                     +"<hr>"
-                    +"<span'>Less relevant results:</span>"
-                    +"</div>") 
+                    +"<details id='less-relevant-theatre-results'>"
+                    +`<summary>Less relevant results (${theatres.length-index}) - click to show/hide</summary>`
+                    +"<div>") 
                 : ""
             )
             +"<li>"
             +`<b><a href="${theatre.url}">${theatre.title}</a></b> - ${theatre.city[0].toUpperCase()+theatre.city.slice(1).toLowerCase()}`
-            +"</li>").join('')
+            +"</li>"
+            +(
+                (index === theatres.length-1 && theatre.ratio <= 60)
+                ? "</div></details></div>"
+                : ""
+            )
+        ).join('')
         +"</ol>";
 }
 
 async function lookupTheatres() {
     let query = document.getElementById('query-input').value;
     let searchBy = document.getElementById('search-by-input').value;
+    let resultCount = document.getElementById('theatre-result-count').value;
     
     let loadingTimeout = indicateSearching();
     displayDebugData();
 
-    const response = await fetch(`/api/theatre-lookup?${new URLSearchParams({ query, searchBy})}`);
+    const response = await fetch(`/api/theatre-lookup?${new URLSearchParams({ query, searchBy, resultCount})}`);
     
     const data = await response.json();
     

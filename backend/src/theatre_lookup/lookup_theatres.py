@@ -28,12 +28,15 @@ def lookup_theatres(query: str, search_by:str = "city", count: int = 10):
 
         theatres_dict = [{"url": url[0].text, **{attr.get("name"): attr.text for attr in url.findall(".//Attribute")}} for url in SITEMAP_THEATRES_XML]
 
+    if search_by == "name":
+        search_by = "title"
+    
     matches = sorted(
         ({
             "ratio": fuzz.token_set_ratio(query.lower(),
             theatre[search_by].lower()), **theatre
         } for theatre in theatres_dict),
-        
+
         key=lambda theatre: theatre["ratio"],
             reverse=True)
 

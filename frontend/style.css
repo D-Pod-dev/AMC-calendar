@@ -3,6 +3,36 @@
     color: white;
 }
 
+a {
+    color:rgb(115, 212, 247);
+}
+
+a:hover {
+    color: deepskyblue;
+}
+
+details div {
+    padding-left: 1.5rem;
+}
+
+details {
+    margin-left: 0.5rem;
+}
+
+summary {
+    margin-left: 0rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+summary:hover {
+    cursor: pointer;
+}
+
+#theatre-lookup-options {
+    color: lightgray;
+}
+
 #status-message {
     font-family: Consolas, Courier New, monospace;
     color: lightgray;
@@ -37,21 +67,18 @@ code {
     margin-left: 2rem;
 }
 
-#theatre-results-divider * {
+#theatre-results-divider summary {
     color: lightgray;
-    margin-left: 3rem;
-    width: 20rem;
+    margin-left: 1rem;
+}
+
+#theatre-results-divider details div {
+    padding-left: 1rem;
+    border-left: 1px solid lightgray;
 }
 
 #theatre-results-divider hr {
+    width: 20rem;
     margin-left: 1rem;
     margin-bottom: 0.25rem;
-}
-
-a {
-    color:rgb(115, 212, 247);
-}
-
-a:hover {
-    color: deepskyblue;
 }

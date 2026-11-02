@@ -7,9 +7,9 @@ from ..theatre_lookup.lookup_theatres import *
 router = APIRouter()
 
 @router.get("/api/theatre-lookup")
-async def theatre_lookup(query:str, searchBy:str):
+async def theatre_lookup(query:str, searchBy:str, resultCount:int = 10):
     try:
-        return lookup_theatres(query, searchBy)
+        return lookup_theatres(query, searchBy, resultCount)
     except HTTPError as e:
         raise HTTPException(
             status_code=e.response.status_code,

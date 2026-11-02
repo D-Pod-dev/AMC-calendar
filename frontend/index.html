@@ -15,11 +15,20 @@
                 <select name="search-by" id="search-by-input" onchange="document.getElementById('query-input').placeholder=`Enter theatre ${document.getElementById('search-by-input').value}`">
                     <option value="city">city</option>
                     <option value="name">name</option>
-                </select>
-                :
+                </select>:
             </label>
             <input id="query-input" name="query" type="text" placeholder='Enter theatre city'>
             <button id="theatre-search-button" onclick="lookupTheatres()">Search</button>
+            <details id="theatre-lookup-options">
+                <summary>
+                    Advanced options
+                </summary>
+                <div>
+                    <label for="theatre-result-count">Number of results:</label>
+                    <input id="theatre-result-count" type="number" min="1" value="10" placeholder="e.g. 10">
+                </div>
+            </details>
+
             <hr>
             <div id="status-message">--- | N/A</div>
             <br>
