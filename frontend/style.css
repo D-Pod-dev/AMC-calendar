@@ -12,19 +12,46 @@
 code {
     display: block;
     padding: 0.75rem;
-    margin: 0/75rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+
     color: lightgray;
     background-color: rgb(35,35,35);
-    border-radius: 3px;
-}
-
-pre {
+    border-radius: 5px;
+    
     overflow-x: auto;
     overflow-y: auto;
     max-width: 100%;
     max-height: 50%;
 }
 
+#theatre-results * {
+    margin-bottom: 1rem;
+}
+
 #theatre-list {
+    padding-left: 0rem;
+}
+
+#theatre-list li {
+    margin-left: 2rem;
+}
+
+#theatre-results-divider * {
+    color: lightgray;
+    margin-left: 3rem;
+    width: 20rem;
+}
+
+#theatre-results-divider hr {
     margin-left: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+a {
+    color:rgb(115, 212, 247);
+}
+
+a:hover {
+    color: deepskyblue;
 }

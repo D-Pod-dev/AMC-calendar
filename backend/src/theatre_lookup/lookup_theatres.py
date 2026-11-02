@@ -14,7 +14,7 @@ def print_xml(xml):
         ET.dump(xml)
         # print(minidom.parseString(ET.tostring(xml, encoding="unicode")).toprettyxml(indent=" "*2))
 
-def lookup_theatres(query: str, search_by:str, count: int = 10):
+def lookup_theatres(query: str, search_by:str = "city", count: int = 10):
     global SITEMAP_THEATRES_XML, theatres_dict
 
     # load theatres if not loaded yet
@@ -29,10 +29,12 @@ def lookup_theatres(query: str, search_by:str, count: int = 10):
         theatres_dict = [{"url": url[0].text, **{attr.get("name"): attr.text for attr in url.findall(".//Attribute")}} for url in SITEMAP_THEATRES_XML]
 
     matches = sorted(
-        theatres_dict,
-        key=lambda theatre:
-            fuzz.token_set_ratio(
-                query.lower(), theatre[search_by].lower()),
+        ({
+            "ratio": fuzz.token_set_ratio(query.lower(),
+            theatre[search_by].lower()), **theatre
+        } for theatre in theatres_dict),
+        
+        key=lambda theatre: theatre["ratio"],
             reverse=True)
 
     return matches[:count]

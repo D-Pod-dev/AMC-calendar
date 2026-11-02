@@ -44,7 +44,28 @@ function resetTheatreSearchButton() {
 
 function displayTheatreResults(theatres) {
     let resultsContainer = document.getElementById('theatre-results');
-    resultsContainer.innerHTML = "<h2>Theatre Results:</h2>"+"<div id='theatre-list'>"+theatres.map(theatre => `<b><a href="${theatre.url}">${theatre.title}</a></b> - ${theatre.city[0].toUpperCase()+theatre.city.slice(1).toLowerCase()}`).join('<br><br>')+"</div>";
+    resultsContainer.innerHTML = 
+        "<h2>Theatre Results:</h2>"
+        +"<ol id='theatre-list'>"
+        +theatres.map((theatre, index) =>     
+            (
+                (index === 0 && theatre.ratio <= 60)
+                ? ("<p style='margin-left: 1rem;'>No perfect matches.</p>")
+                : ""
+            )    
+            +(
+                (theatre.ratio <= 60 && 
+                (index === 0 || theatres[index-1].ratio > 60))
+                ? ("<div id='theatre-results-divider'>"
+                    +"<hr>"
+                    +"<span'>Less relevant results:</span>"
+                    +"</div>") 
+                : ""
+            )
+            +"<li>"
+            +`<b><a href="${theatre.url}">${theatre.title}</a></b> - ${theatre.city[0].toUpperCase()+theatre.city.slice(1).toLowerCase()}`
+            +"</li>").join('')
+        +"</ol>";
 }
 
 async function lookupTheatres() {
