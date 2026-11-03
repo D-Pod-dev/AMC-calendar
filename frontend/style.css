@@ -4,19 +4,29 @@
     /*border: 1px solid lightblue;*/
 }
 
+@keyframes focusOutline {
+    from {
+        box-shadow:
+            0 0 0 0px black,
+            0 0 0 1px cornflowerblue,
+            0 0 3px 2px skyblue
+        ;
+    }
+
+    to {
+        box-shadow:
+            0 0 0 1px black,
+            0 0 0 3px cornflowerblue,
+            0 0 3px 3px skyblue
+        ;
+    }
+}
+
 *:focus-visible {
     outline: None;
     border-radius: 3px;
-
-    box-shadow:
-        0 0 0 0px black,
-        0 0 0 2px cornflowerblue,
-        0 0 3px 2px skyblue;
     
-    /*transition: box-shadow
-            0 0 0 2px black,
-            0 0 0 4px cornflowerblue,
-            0 0 3px 4px skyblue;*/
+    animation: focusOutline 0.1s ease-in-out 1 forwards;
 }
     
 a {
