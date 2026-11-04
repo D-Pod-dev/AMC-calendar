@@ -43,19 +43,21 @@ function resetTheatreSearchButton() {
 }
 
 function displayTheatreResults(theatres) {
+    const relevanceCutoff = 75
+    
     let resultsContainer = document.getElementById('theatre-results');
     resultsContainer.innerHTML = 
         "<h2>Theatre Results:</h2>"
         +"<ol id='theatre-list'>"
         +theatres.map((theatre, index) =>     
             (
-                (index === 0 && theatre.ratio <= 60)
+                (index === 0 && theatre.ratio <= relevanceCutoff)
                 ? ("<p style='margin-left: 1rem;'>No perfect matches.</p>")
                 : ""
             )    
             +(
-                (theatre.ratio <= 60 && 
-                (index === 0 || theatres[index-1].ratio > 60))
+                (theatre.ratio <= relevanceCutoff && 
+                (index === 0 || theatres[index-1].ratio > relevanceCutoff))
                 ? ("<div id='theatre-results-divider'>"
                     +"<hr>"
                     +"<details id='less-relevant-theatre-results'>"

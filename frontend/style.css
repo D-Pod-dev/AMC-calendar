@@ -1,7 +1,7 @@
 * {
     background-color: black;
     color: white;
-    /*border: 1px solid lightblue;*/
+    /* border: 1px solid lightblue; */
 }
 
 @keyframes focusOutline {
@@ -45,7 +45,8 @@ details div {
 }
 
 summary {
-    padding: 0.5rem;
+    padding: 0.25rem;
+    margin: 0.25rem;
     width: fit-content;
     list-style: none;
 }
@@ -89,8 +90,11 @@ summary:hover {
 }
 
 .code-dropdown summary {
-    padding: 0.75rem;
+    padding: 0.6rem;
     color: lightgray;
+    margin: 0.25rem;
+
+    transition: margin 0.5 ease-in-out;
 }
 
 .code-dropdown hr {
@@ -103,10 +107,12 @@ summary:hover {
 
 .code-dropdown {
     border-radius: 10px;
+    background-color: rgb(35,35,35);
+    border: solid 1px rgb(35,35,35);
 }
 
 .code-dropdown:open {
-    background-color: rgb(35,35,35);
+    display: block;
     /*border: solid 2px white;*/
 }
 
@@ -129,7 +135,7 @@ pre code {
 }
 
 #theatre-results * {
-    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 #theatre-list {
@@ -142,8 +148,8 @@ pre code {
 
 #theatre-results-divider summary {
     color: lightgray;
-    margin-left: 0rem;
-    margin-top: 0;
+    margin: 0;
+    margin-bottom: 0.5rem;
 }
 
 #theatre-results-divider details {
