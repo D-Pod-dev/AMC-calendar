@@ -47,6 +47,25 @@ details div {
 summary {
     padding: 0.5rem;
     width: fit-content;
+    list-style: none;
+}
+
+summary::before {
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    
+    display: inline-block;
+    transition: transform 0.15s ease-in-out;
+    transform-origin: 55% 55%;
+    margin-right: 0.5rem;
+}
+
+details[open] summary::before {
+    transform: rotate(45deg);
 }
 
 summary:hover {
@@ -79,7 +98,7 @@ summary:hover {
 }
 
 .code-dropdown summary:hover {
-    background-color: rgb(45,45,45);
+    background-color: rgb(55,55,55);
 }
 
 .code-dropdown {
