@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AMC Calendar</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <base target="_blank">
 </head>
 <body>
@@ -20,9 +21,7 @@
             <input id="query-input" name="query" type="text" placeholder='Enter theatre city' autofocus>
             <button id="theatre-search-button" onclick="lookupTheatres()">Search</button>
             <details id="theatre-lookup-options">
-                <summary>
-                    Advanced options
-                </summary>
+                <summary>Advanced options</summary>
                 <div>
                     <label for="theatre-result-count">Number of results:</label>
                     <input id="theatre-result-count" type="number" min="1" value="10" placeholder="e.g. 10">

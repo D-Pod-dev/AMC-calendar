@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
 * {
     background-color: black;
     color: white;
+    font-family: Questrial, Verdana, Geneva, Tahoma, sans-serif;
     /* border: 1px solid lightblue; */
 }
 
@@ -53,17 +56,29 @@ summary {
 }
 
 summary::before {
-    content: url('assets/chevron-right.svg');
+    font-family: FontAwesome;
+    font-size: 0.75rem;
+    content: '\f054';
+    fill: white;
     display: inline-block;
     align-content: center;
     transform-origin: 50% 45.5%;
     transform-box: fill-box;
     transition: transform 0.1s ease-in-out;
-    /* margin-right: 0.5; */
+    margin-right: 0.5rem;
 }
 
 details[open] summary::before {
     transform: rotate(90deg);
+}
+
+details[closed] {
+    height: 0;
+    transition: height 0.1 ease-in-out;
+}
+
+details[open] {
+    height: fit-content;
 }
 
 #theatre-lookup-options {
@@ -79,7 +94,8 @@ details[open] summary::before {
 .code-dropdown * {
     background-color: rgb(35,35,35);
     border-radius: 10px;
-    margin: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .code-dropdown summary {
