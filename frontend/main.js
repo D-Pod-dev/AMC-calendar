@@ -55,14 +55,13 @@ function displayTheatreResults(theatres) {
                 ? (`<p style='margin-left: 1rem;'>No perfect matches. (`
                     +`<span class="refocus" id="focus-search-by-input" tabindex="0"`
                     +` onclick="document.getElementById('search-by-input').focus();"`
-                    +`>Maybe try changing search filter?</span>)</p>`)
+                    +`>Maybe try changing the search filter?</span>)</p>`)
                 : ""
             )    
             +(
                 (theatre.ratio <= relevanceCutoff && 
                 (index === 0 || theatres[index-1].ratio > relevanceCutoff))
                 ? ("<div id='theatre-results-divider'>"
-                    +"<hr>"
                     +"<details id='less-relevant-theatre-results'>"
                     +`<summary>Less relevant results (${theatres.length-index}) - click to show/hide</summary>`
                     +"<div>") 

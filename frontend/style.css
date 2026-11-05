@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
-* {
-    background-color: black;
-    color: white;
+body {
     font-family: Questrial, Verdana, Geneva, Tahoma, sans-serif;
-    /* border: 1px solid lightblue; */
+    color: #eee;
+    background-color: black;
+}
+
+select, input, button {    
+    color: #eee;
+    background-color: black;
 }
 
 @keyframes focusOutline {
@@ -96,6 +100,7 @@ details[open] {
     border-radius: 10px;
     margin-top: 0;
     margin-bottom: 0;
+    font-size: 0.9rem;
 }
 
 .code-dropdown summary {
@@ -159,6 +164,8 @@ pre code {
     color: lightgray;
     margin: 0;
     margin-bottom: 0.5rem;
+    border-top: solid 2px;
+    padding-top: 0.5rem;
 }
 
 #theatre-results-divider details {
