@@ -53,21 +53,17 @@ summary {
 }
 
 summary::before {
-    content: '';
-    width: 0.4rem;
-    height: 0.4rem;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    transform: rotate(-45deg);
-    
+    content: url('assets/chevron-right.svg');
     display: inline-block;
-    transition: transform 0.15s ease-in-out;
-    transform-origin: 55% 55%;
-    margin-right: 0.5rem;
+    align-content: center;
+    transform-origin: 50% 45.5%;
+    transform-box: fill-box;
+    transition: transform 0.1s ease-in-out;
+    /* margin-right: 0.5; */
 }
 
 details[open] summary::before {
-    transform: rotate(45deg);
+    transform: rotate(90deg);
 }
 
 #theatre-lookup-options {
