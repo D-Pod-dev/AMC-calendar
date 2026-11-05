@@ -52,7 +52,10 @@ function displayTheatreResults(theatres) {
         +theatres.map((theatre, index) =>     
             (
                 (index === 0 && theatre.ratio <= relevanceCutoff)
-                ? ("<p style='margin-left: 1rem;'>No perfect matches.</p>")
+                ? (`<p style='margin-left: 1rem;'>No perfect matches. (`
+                    +`<span class="refocus" id="focus-search-by-input" tabindex="0"`
+                    +` onclick="document.getElementById('search-by-input').focus();"`
+                    +`>Maybe try changing search filter?</span>)</p>`)
                 : ""
             )    
             +(
@@ -75,6 +78,12 @@ function displayTheatreResults(theatres) {
             )
         ).join('')
         +"</ol>";
+
+        document.getElementById('focus-search-by-input').addEventListener('keydown', function(e) {
+            if (e.key === "Enter") {
+                this.click();
+            };
+        })
 }
 
 async function lookupTheatres() {

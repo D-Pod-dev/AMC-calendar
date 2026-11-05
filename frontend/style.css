@@ -49,6 +49,7 @@ summary {
     margin: 0.25rem;
     width: fit-content;
     list-style: none;
+    cursor: pointer;
 }
 
 summary::before {
@@ -67,10 +68,6 @@ summary::before {
 
 details[open] summary::before {
     transform: rotate(45deg);
-}
-
-summary:hover {
-    cursor: pointer;
 }
 
 #theatre-lookup-options {
@@ -171,3 +168,14 @@ pre code {
     margin-left: 0rem;
     margin-bottom: 0.25rem;
 }
+
+.refocus {
+    color: cornflowerblue;
+    cursor: pointer;
+    
+    &:hover {
+        text-underline-offset: 0.15em;
+        text-decoration: underline;
+    }
+}
+
