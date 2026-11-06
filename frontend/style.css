@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
 body {
     font-family: Questrial, Verdana, Geneva, Tahoma, sans-serif;
     color: #eee;
@@ -7,8 +12,10 @@ body {
 }
 
 select, input, button {    
+    font: inherit;
     color: #eee;
     background-color: black;
+    border-radius: 4px;
 }
 
 @keyframes focusOutline {
@@ -36,6 +43,10 @@ select, input, button {
     z-index: 999;
     
     animation: focusOutline 0.1s ease-in-out 1 forwards;
+}
+
+h1 {
+    text-align: center;
 }
     
 a {
@@ -100,10 +111,10 @@ details[open] {
     border-radius: 10px;
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 0.9rem;
 }
 
 .code-dropdown summary {
+    font-size: 0.95rem;
     padding: 0.6rem;
     color: lightgray;
     margin: 0.25rem;
