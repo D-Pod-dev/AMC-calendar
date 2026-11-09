@@ -8,19 +8,23 @@
         var(--main-color) 90%,
         var(--background-color) 10%
     );
-    --link-color: rgb(115, 212, 247);
+    --link-color: color-mix(
+        in srgb,
+        var(--highlight-color) 50%,
+        var(--main-color) 50%
+    );
     
     /* interaction colors */
-    --interaction-color: cornflowerblue;
+    --highlight-color: cornflowerblue;
     --focus-glow-color: color-mix(
         in srgb,
-        var(--interaction-color) 70%,
-        white 30%
+        var(--highlight-color) 70%,
+        var(--main-color) 30%
     );
     --link-hover-color: color-mix(
         in srgb,
-        var(--interaction-color) 80%,
-        white 20%
+        var(--highlight-color) 80%,
+        var(--main-color) 20%
     );
 
     /* code colors */
@@ -56,7 +60,7 @@ select, input, button {
     from {
         box-shadow:
             0 0 0 0px var(--background-color),
-            0 0 0 1px var(--interaction-color),
+            0 0 0 1px var(--highlight-color),
             0 0 3px 2px var(--focus-glow-color)
         ;
     }
@@ -64,7 +68,7 @@ select, input, button {
     to {
         box-shadow:
             0 0 0 1px var(--background-color),
-            0 0 0 3px var(--interaction-color),
+            0 0 0 3px var(--highlight-color),
             0 0 3px 3px var(--focus-glow-color);
     }
 }
@@ -83,7 +87,7 @@ h1 {
 }
     
 a {
-    color:rgb(115, 212, 247);
+    color:var(--link-color);
 }
 
 a:hover {
@@ -141,8 +145,12 @@ details[open] {
     
     border-radius: 10px;
     padding-top: 5px;
-    box-shadow: inset 0 0 15px 2px var(--code-background-color);
-    backdrop-filter: blur(5px);
+    box-shadow: inset 0 0 15px 2px color-mix(
+        in srgb,
+        var(--code-background-color) 72.5%,
+        var(--code-color) 22.5%
+    );
+    backdrop-filter: blur(3px);
 
     resize: both;
     overflow: auto;
@@ -175,7 +183,13 @@ details[open] {
 }
 
 .code-dropdown hr {
-    border-color: var(--secondary-color);
+    border: none;
+    height: 1px;
+    background-color: color-mix(
+        in srgb,
+        var(--code-color) 20%,
+        var(--code-background-color) 80%
+    );
 }
 
 .code-dropdown summary:hover {
@@ -244,7 +258,7 @@ pre code {
 }
 
 .refocus {
-    color: var(--interaction-color);
+    color: var(--highlight-color);
     cursor: pointer;
     
     &:hover {
