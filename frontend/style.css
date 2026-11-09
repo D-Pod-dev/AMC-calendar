@@ -3,7 +3,11 @@
 :root {
     --background-color: black;
     --main-color: #eee;
-    --secondary-color: rgb(154, 154, 154);
+    --secondary-color: color-mix(
+        in srgb,
+        var(--main-color) 90%,
+        var(--background-color) 10%
+    );
     --link-color: rgb(115, 212, 247);
     
     /* interaction colors */
@@ -13,7 +17,11 @@
         var(--interaction-color) 70%,
         white 30%
     );
-    --link-hover-color: deepskyblue;
+    --link-hover-color: color-mix(
+        in srgb,
+        var(--interaction-color) 80%,
+        white 20%
+    );
 
     /* code colors */
     --code-background-color: rgb(35,35,35);
@@ -120,6 +128,10 @@ details[open] {
     height: fit-content;
 }
 
+#theatre-lookup-options {
+    color: var(--secondary-color);
+}
+
 #debug-panel {
     position: fixed;
     z-index: 998;
@@ -208,7 +220,12 @@ pre code {
     margin-left: 2rem;
 }
 
-#theatre-results-divider summary {
+#less-relevant-theatre-results {
+    margin-left: 1rem;
+    margin-top: 0rem;
+}
+
+#less-relevant-theatre-results summary {
     color: var(--secondary-color);
     margin: 0;
     margin-bottom: 0.5rem;
@@ -216,24 +233,14 @@ pre code {
     border-top: solid 2px;
 }
 
-#theatre-results-divider details {
-    margin-top: 0rem;
-}
-
-#theatre-results-divider details div {
+#less-relevant-theatre-results div {
     padding-left: 0;
-    border-left: 2px solid var(--secondary-color);
+    border-left: 2px solid color-mix(
+        in srgb,
+        var(--main-color) 60%,
+        var(--background-color) 40%
+    );
     margin-top: 0;
-}
-
-#theatre-results-divider {
-    margin-left: 1rem;
-}
-
-#theatre-results-divider hr {
-    width: 20rem;
-    margin-left: 0rem;
-    margin-bottom: 0.25rem;
 }
 
 .refocus {

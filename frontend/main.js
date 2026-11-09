@@ -61,8 +61,7 @@ function displayTheatreResults(theatres) {
             +(
                 (theatre.ratio <= relevanceCutoff && 
                 (index === 0 || theatres[index-1].ratio > relevanceCutoff))
-                ? ("<div id='theatre-results-divider'>"
-                    +"<details id='less-relevant-theatre-results'>"
+                ? ("<details id='less-relevant-theatre-results'>"
                     +`<summary>Less relevant results (${theatres.length-index}) - click to show/hide</summary>`
                     +"<div>") 
                 : ""
@@ -72,7 +71,7 @@ function displayTheatreResults(theatres) {
             +"</li>"
             +(
                 (index === theatres.length-1 && theatre.ratio <= 60)
-                ? "</div></details></div>"
+                ? "</div></details>"
                 : ""
             )
         ).join('')
