@@ -1,4 +1,12 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* DEBUG PURPOSES: when devtools isn't available */
+/* * {
+    border: solid 1px lightblue;
+} */
+
+/* THEME COLOR VARIABLES */
 
 :root {
     /* main colors */
@@ -11,46 +19,43 @@
         in srgb,
         var(--main-color) 90%,
         var(--background-color) 10%
-    );
+    );    
     --link-color: color-mix(
         in srgb,
         var(--highlight-color) 50%,
         var(--main-color) 50%
-    );
+    );    
     
     /* interaction colors */
     --focus-glow-color: color-mix(
         in srgb,
         var(--highlight-color) 70%,
         var(--main-color) 30%
-    );
+    );    
     --link-hover-color: color-mix(
         in srgb,
         var(--highlight-color) 80%,
         var(--main-color) 20%
-    );
+    );    
 
     /* code colors */
     --code-background-color: rgb(35,35,35);
     --code-hover-color: rgb(55,55,55);
     --code-color: lightgray;
-}
+}    
+
+/* MAIN LAYOUT */
 
 main {
     max-width: 1000px;
     margin: 0 auto;
-}
+}    
 
 body {
     font-family: Inter, Verdana, Geneva, Tahoma, sans-serif;
     color: var(--main-color);
     background-color: var(--background-color);
-}
-
-/* debug purposes: when devtools isn't available */
-/* * {
-    border: solid 1px lightblue;
-} */
+}    
 
 select, input, button {    
     font: inherit;
@@ -58,6 +63,8 @@ select, input, button {
     background-color: inherit;
     border-radius: 4px;
 }
+
+/* OUTLINE ON KEYBOARD FOCUS */
 
 @keyframes focusOutline {
     from {
@@ -85,22 +92,21 @@ select, input, button {
     animation: focusOutline 0.1s ease-in-out 1 forwards;
 }
 
+/* GENERAL STYLING */
+
 h1 {
     text-align: center;
 }
     
 a {
     color:var(--link-color);
+    
+    :hover {
+        color: var(--link-hover-color);
+    }
 }
 
-a:hover {
-    color: var(--link-hover-color);
-}
-
-details div {
-    padding-left: 1.5rem;
-    margin-left: 0.5rem;
-}
+/* DETAILS/SUMMARY */
 
 summary {
     padding: 0.25rem;
@@ -108,36 +114,91 @@ summary {
     width: fit-content;
     list-style: none;
     cursor: pointer;
-}
+    
+    &::before {
+        font-family: FontAwesome;
+        font-size: 0.75rem;
+        content: '\f054';
+        display: inline-block;
+        align-content: center;
+        transform-origin: 50% 45.5%;
+        transform-box: fill-box;
+        transition: transform 0.1s ease-in-out;
+        margin-right: 0.5rem;
+    }
+}    
 
-summary::before {
-    font-family: FontAwesome;
-    font-size: 0.75rem;
-    content: '\f054';
-    display: inline-block;
-    align-content: center;
-    transform-origin: 50% 45.5%;
-    transform-box: fill-box;
-    transition: transform 0.1s ease-in-out;
-    margin-right: 0.5rem;
-}
-
-details[open] summary::before {
-    transform: rotate(90deg);
-}
-
-details[closed] {
-    height: 0;
-    transition: height 0.1 ease-in-out;
-}
-
-details[open] {
+details {
     height: fit-content;
+    transition: height 1 ease-in-out;
+    
+    div {
+        padding-left: 1.5rem;
+        margin-left: 0.5rem;
+    }        
+    
+    &[open] summary::before {
+        transform: rotate(90deg);
+    }        
+}            
+
+/* CODE */
+
+pre code {
+    display: block;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    
+    color: var(--code-color);
+    background-color: var(--code-background-color);
+    
+    overflow-x: auto;
+    overflow-y: auto;
+    max-width: 100%;
+    max-height: 50vw;
+    
+    border: 1rem solid var(--code-background-color);
 }
 
-#theatre-lookup-options {
-    color: var(--secondary-color);
-}
+.code-dropdown {
+    border-radius: 10px;
+    background-color: var(--code-background-color);
+    border: solid 1px var(--code-background-color);
+    
+    * {
+        border-radius: 10px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    /* i genuinely don't know why this is here */
+    /* &:open {
+        display: block;
+    } */
+    
+    summary {
+        font-size: 0.95rem;
+        padding: 0.6rem;
+        color: var(--code-color);
+        margin: 0.25rem;
+        
+        &:hover {
+            background-color: var(--code-hover-color);
+        }
+    }
+    
+    hr {
+        border: none;
+        height: 1px;
+        background-color: color-mix(
+            in srgb,
+            var(--code-color) 20%,
+            var(--code-background-color) 80%
+        );
+    }    
+}    
+
+/* DEBUG PANEL */
 
 #debug-panel {
     position: fixed;
@@ -147,117 +208,75 @@ details[open] {
     margin: 5px;
     
     border-radius: 10px;
-    padding-top: 5px;
     box-shadow: inset 0 0 15px 2px color-mix(
         in srgb,
         var(--code-background-color) 72.5%,
         var(--code-color) 22.5%
     );
     backdrop-filter: blur(3px);
-
-    resize: both;
+    
+    max-width: 60vw;
+    max-height: 50vh;
     overflow: auto;
-}
 
+    .code-dropdown {
+        height: 100%;
+    }
+}
+    
 #status-message {
     font-family: Consolas, Courier New, monospace;
     color: var(--code-color);
     font-size: 0.85rem;
-    margin: 5px;
-    margin-left: 10px;
+    margin: 10px;
+    margin-bottom: 5px;
 }
 
-.code-dropdown * {
-    background-color: var(--code-background-color);
-    border-radius: 10px;
-    margin-top: 0;
-    margin-bottom: 0;
+/* THEATRE LOOKUP DROPDOWN */
 
-    max-height: 50%;
-}
-
-.code-dropdown summary {
-    font-size: 0.95rem;
-    padding: 0.6rem;
-    color: var(--code-color);
-    margin: 0.25rem;
-
-    transition: margin 0.5 ease-in-out;
-}
-
-.code-dropdown hr {
-    border: none;
-    height: 1px;
-    background-color: color-mix(
-        in srgb,
-        var(--code-color) 20%,
-        var(--code-background-color) 80%
-    );
-}
-
-.code-dropdown summary:hover {
-    background-color: var(--code-hover-color);
-}
-
-.code-dropdown {
-    border-radius: 10px;
-    background-color: var(--code-background-color);
-    border: solid 1px var(--code-background-color);
-}
-
-.code-dropdown:open {
-    display: block;
-}
-
-pre code {
-    display: block;
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
-
-    color: var(--code-color);
-    background-color: var(--code-background-color);
-    
-    overflow-x: auto;
-    overflow-y: scroll;
-    max-width: 100%;
-    max-height: 50vw;
-
-    border: 1rem solid var(--code-background-color);
-}
-
-#theatre-results * {
-    margin-bottom: 1rem;
-}
-
-#theatre-list {
-    padding-left: 0rem;
-}
-
-#theatre-list li {
-    margin-left: 2rem;
-}
-
-#less-relevant-theatre-results {
-    margin-left: 1rem;
-    margin-top: 0rem;
-}
-
-#less-relevant-theatre-results summary {
+#theatre-lookup-options {
     color: var(--secondary-color);
-    margin: 0;
-    margin-bottom: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: solid 2px;
 }
 
-#less-relevant-theatre-results div {
-    padding-left: 0;
-    border-left: 2px solid color-mix(
-        in srgb,
-        var(--main-color) 60%,
-        var(--background-color) 40%
-    );
-    margin-top: 0;
+
+/* THEATRE RESULTS */
+
+#theatre-results {
+    * {
+        margin-bottom: 1rem;
+    }
+    
+    #theatre-list {
+        padding-left: 0rem;
+        
+        li {
+            margin-left: 2rem;
+        }
+        
+        #less-relevant-theatre-results {
+            margin-left: 1rem;
+            margin-top: 0rem;
+            
+            summary {
+                color: var(--secondary-color);
+                border-top: solid 2px;
+                
+                margin: 0 0 0 0.5rem;
+                padding-top: 0.5rem;
+            }
+            
+            div {
+                padding-left: 0;
+                margin-top: 0;
+
+                border-left: 2px solid color-mix(
+                    in srgb,
+                    var(--main-color) 60%,
+                    var(--background-color) 40%
+                );
+            }
+        }
+    }
 }
 
 .refocus {
