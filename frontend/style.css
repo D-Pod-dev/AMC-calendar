@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
+    /* main colors */
     --background-color: black;
     --main-color: #eee;
+    --highlight-color: cornflowerblue;
+    
+    /* secondary colors */
     --secondary-color: color-mix(
         in srgb,
         var(--main-color) 90%,
@@ -15,7 +19,6 @@
     );
     
     /* interaction colors */
-    --highlight-color: cornflowerblue;
     --focus-glow-color: color-mix(
         in srgb,
         var(--highlight-color) 70%,
