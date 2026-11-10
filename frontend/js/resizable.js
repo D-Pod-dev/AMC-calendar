@@ -2,8 +2,8 @@ class Resizable {
     constructor(element, options = {}) {
         this.element = element;
         
-        parentWidth = element.parentElement.clientWidth;
-        parentHeight = element.parentElement.clientHeight;
+        const parentWidth = element.parentElement.clientWidth;
+        const parentHeight = element.parentElement.clientHeight;
 
         this.minWidth = Math.min(parentWidth, options.minWidth || 400);
         this.minHeight = Math.min(parentHeight, options.minHeight || 300);
@@ -28,4 +28,4 @@ const dropdown = panel.querySelector('.code-dropdown')
 const dataContainer = dropdown.querySelector('pre code')
 
 dataContainer.textContent = `'resizable.js' is linked`;
-
+displayStatus(200);
