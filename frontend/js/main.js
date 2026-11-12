@@ -1,9 +1,9 @@
 const { HttpStatusCode } = axios;
 
-const defaultTheatreSearchButtonText = document.getElementById('theatre-search-button').textContent
+window.lookupTheatres = lookupTheatres;
 
 // render color-coded status code
-function displayStatus(statusCode) {
+export function displayStatus(statusCode) {
     let statusDisplay;
 
     if (typeof statusCode === 'number') {
@@ -27,7 +27,7 @@ function displayDebugData(data) {
 function indicateSearching() {
     let searchButton = document.getElementById('theatre-search-button')
     
-    loadingTimeoutReached = false;
+    let loadingTimeoutReached = false;
     searchButton.disabled = true;
     
     return setTimeout(() => {
@@ -37,6 +37,7 @@ function indicateSearching() {
 
 function resetTheatreSearchButton() {
     let searchButton = document.getElementById('theatre-search-button');
+    const defaultTheatreSearchButtonText = searchButton.textContent;
 
     searchButton.disabled = false;
     searchButton.textContent = defaultTheatreSearchButtonText;
@@ -114,5 +115,23 @@ async function lookupTheatres() {
 document.getElementById('query-input').addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         lookupTheatres();
+    };
+});
+
+// MAKE DEBUG PANEL RESIZABLE
+import { Resizable } from './utils/resizable.js';
+
+const debugPanel = document.getElementById('debug-panel');
+const dropdown = document.querySelector('.code-dropdown');
+
+const panelResizable = new Resizable(debugPanel, {isResizable: false});
+console.log(`upon init (main.js): ${panelResizable.isResizable}`)
+
+dropdown.addEventListener('toggle', () => {
+    if (dropdown.open) {
+        panelResizable.enable();
+    } else {
+        panelResizable.disable();
+        panelResizable.fitContent();
     };
 });

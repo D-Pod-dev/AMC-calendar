@@ -198,11 +198,22 @@ pre code {
     }    
 }    
 
+/* RESIZABLE */
+.resize-handle {
+    position: absolute;
+    z-index: 998;
+
+    font-family: FontAwesome;
+    color: var(--main-color);
+
+    cursor: nesw-resize;
+}
+
 /* DEBUG PANEL */
 
 #debug-panel {
     position: fixed;
-    z-index: 998;
+    z-index: 997;
     bottom: 0;
     left: 0;
     margin: 5px;
