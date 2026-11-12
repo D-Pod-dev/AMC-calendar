@@ -132,7 +132,7 @@ details {
     height: fit-content;
     transition: height 1 ease-in-out;
     
-    div {
+    &::details-content {
         padding-left: 1.5rem;
         margin-left: 0.5rem;
     }        
@@ -155,12 +155,15 @@ pre code {
     overflow-x: auto;
     overflow-y: auto;
     max-width: 100%;
-    max-height: 50vw;
+    /* max-height: 50vw; */
     
     border: 1rem solid var(--code-background-color);
 }
 
 .code-dropdown {
+    display: flex;
+    flex-direction: column;
+
     border-radius: 10px;
     background-color: var(--code-background-color);
     border: solid 1px var(--code-background-color);
@@ -170,11 +173,6 @@ pre code {
         margin-top: 0;
         margin-bottom: 0;
     }
-    
-    /* i genuinely don't know why this is here */
-    /* &:open {
-        display: block;
-    } */
     
     summary {
         font-size: 0.95rem;
@@ -196,6 +194,11 @@ pre code {
             var(--code-background-color) 80%
         );
     }    
+
+    &::details-content {
+        min-height: 0;
+        overflow: auto;
+    }
 }    
 
 /* RESIZABLE */
@@ -203,8 +206,10 @@ pre code {
     position: absolute;
     z-index: 998;
 
-    font-family: FontAwesome;
+    font-family: Consolas, 'Courier New', Courier, monospace;
     color: var(--main-color);
+
+    line-height: 1;
 
     cursor: nesw-resize;
 }
@@ -226,21 +231,52 @@ pre code {
     );
     backdrop-filter: blur(3px);
     
+    display: flex;
+    flex-direction: column;
     max-width: 60vw;
-    max-height: 50vh;
-    overflow: auto;
+    max-height: 60vh;
+    overflow: hidden;
+
+    * {
+        min-height: 0;
+    }
+        
+    #status-message {
+        font-family: Consolas, 'Courier New', Courier, monospace;
+        color: var(--code-color);
+        font-size: 0.85rem;
+        margin: 10px;
+        margin-bottom: 5px;
+        flex-shrink: 0;
+    }
 
     .code-dropdown {
-        height: 100%;
+        flex: 1;
+        min-height: 0;
+        overflow: scroll;
+        display: flex;
+        flex-direction: column;
+
+        summary {
+            flex-shrink: 0;
+        }
+
+        pre {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: scroll;
+            /* background-color: var(--highlight-color); */
+            
+            code {
+                display: block;
+                flex: 1;
+                min-height: 0;
+                overflow: scroll;
+            }
+        }
     }
-}
-    
-#status-message {
-    font-family: Consolas, Courier New, monospace;
-    color: var(--code-color);
-    font-size: 0.85rem;
-    margin: 10px;
-    margin-bottom: 5px;
 }
 
 /* THEATRE LOOKUP DROPDOWN */

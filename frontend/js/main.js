@@ -24,9 +24,10 @@ function displayDebugData(data) {
     document.getElementById('theatre-debug-data').textContent = JSON.stringify(data, null, 2);
 };
 
+const searchButton = document.getElementById('theatre-search-button');
+const defaultTheatreSearchButtonText = searchButton.textContent;
+
 function indicateSearching() {
-    let searchButton = document.getElementById('theatre-search-button')
-    
     let loadingTimeoutReached = false;
     searchButton.disabled = true;
     
@@ -36,9 +37,6 @@ function indicateSearching() {
 };
 
 function resetTheatreSearchButton() {
-    let searchButton = document.getElementById('theatre-search-button');
-    const defaultTheatreSearchButtonText = searchButton.textContent;
-
     searchButton.disabled = false;
     searchButton.textContent = defaultTheatreSearchButtonText;
 }

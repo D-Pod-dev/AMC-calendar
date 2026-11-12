@@ -22,12 +22,9 @@
             <button id="theatre-search-button" onclick="lookupTheatres()">Search</button>
             <details id="theatre-lookup-options">
                 <summary>Advanced options</summary>
-                <div>
                     <label for="theatre-result-count">Number of results:</label>
                     <input id="theatre-result-count" type="number" min="1" value="10" placeholder="e.g. 10">
-                </div>
             </details>
-
             <hr>
             <section id="theatre-results"></section>
         </div>    
@@ -39,7 +36,7 @@
             <summary>Debug Data</summary>
             <hr>
             <pre><code id="theatre-debug-data">No data yet</code></pre>
-        </div>
+        </details>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js" integrity="sha512-OVq+Gfa9PIjbTC0jWOccSFSp/vzkBQ5pMcbHQrNZLl+izmdFmusmAMlX4LT550ivvSnMXMEeG7CxEtjIz6Dn2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
