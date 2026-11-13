@@ -22,6 +22,7 @@ export function displayStatus(statusCode) {
 
 function displayDebugData(data) {
     document.getElementById('theatre-debug-data').textContent = JSON.stringify(data, null, 2);
+
 };
 
 const searchButton = document.getElementById('theatre-search-button');
@@ -76,7 +77,7 @@ function displayTheatreResults(theatres) {
         ).join('')
         +"</ol>";
 
-        document.getElementById('focus-search-by-input').addEventListener('keydown', function(e) {
+        document.getElementById('focus-search-by-input')?.addEventListener('keydown', function(e) {
             if (e.key === "Enter") {
                 this.click();
             };
@@ -121,10 +122,19 @@ import { Resizable } from './utils/resizable.js';
 
 const debugPanel = document.getElementById('debug-panel');
 const dropdown = document.querySelector('.code-dropdown');
+const panelDimensions = debugPanel.getBoundingClientRect();
 
-const panelResizable = new Resizable(debugPanel, {isResizable: false});
+const panelResizable = new Resizable(debugPanel, 
+    {
+        isResizable: false, 
+        minWidth: panelDimensions.width,
+        minHeight: panelDimensions.height + 30
+        // maxWidth: 
+    });
 
 dropdown.addEventListener('toggle', () => {
+    console.log('dropdown toggled');
+    
     if (dropdown.open) {
         panelResizable.enable();
     } else {
@@ -132,3 +142,13 @@ dropdown.addEventListener('toggle', () => {
         panelResizable.fitContent();
     };
 });
+
+window.addEventListener('resize', () => {
+    panelResizable.initParams();
+    panelResizable.applyCSSBounds();
+});
+
+let bottomSpacer = document.createElement('div');
+bottomSpacer.id = 'bottom-spacer';
+bottomSpacer.style.height = `${panelDimensions.height}px`;
+document.querySelector('body').appendChild(bottomSpacer);

@@ -141,7 +141,7 @@ details {
     
     &[open] summary::before {
         transform: rotate(90deg);
-    }        
+    }
 }            
 
 /* CODE */
@@ -241,6 +241,7 @@ pre {
     bottom: 0;
     left: 0;
     margin: 5px;
+    box-sizing: border-box;
     
     border-radius: 10px;
     box-shadow: inset 0 0 15px 2px color-mix(
@@ -252,8 +253,6 @@ pre {
     
     display: flex;
     flex-direction: column;
-    max-width: 60vw;
-    max-height: 60vh;
     overflow: visible; /* so that resize icon (outside border) visible */
 
     * {
