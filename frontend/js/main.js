@@ -123,7 +123,6 @@ const debugPanel = document.getElementById('debug-panel');
 const dropdown = document.querySelector('.code-dropdown');
 
 const panelResizable = new Resizable(debugPanel, {isResizable: false});
-console.log(`upon init (main.js): ${panelResizable.isResizable}`)
 
 dropdown.addEventListener('toggle', () => {
     if (dropdown.open) {

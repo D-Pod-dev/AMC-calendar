@@ -9,6 +9,8 @@
 /* THEME COLOR VARIABLES */
 
 :root {
+    color-scheme: dark;
+
     /* main colors */
     --background-color: black;
     --main-color: #eee;
@@ -144,20 +146,17 @@ details {
 
 /* CODE */
 
-pre code {
-    display: block;
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
-    
-    color: var(--code-color);
-    background-color: var(--code-background-color);
-    
-    overflow-x: auto;
-    overflow-y: auto;
-    max-width: 100%;
-    /* max-height: 50vw; */
-    
+pre {
     border: 1rem solid var(--code-background-color);
+
+    code {
+        display: block;
+        
+        color: var(--code-color);
+        background-color: var(--code-background-color);
+        
+        max-width: 100%;
+    }
 }
 
 .code-dropdown {
@@ -186,8 +185,12 @@ pre code {
     }
     
     hr {
+        position: fixed;
+        left: 0;
+        
         border: none;
         height: 1px;
+        width: 100%;
         background-color: color-mix(
             in srgb,
             var(--code-color) 20%,
@@ -197,7 +200,11 @@ pre code {
 
     &::details-content {
         min-height: 0;
+        min-width: 0;
         overflow: auto;
+
+        padding: 0;
+        margin: 0;
     }
 }    
 
@@ -207,7 +214,19 @@ pre code {
     z-index: 998;
 
     font-family: Consolas, 'Courier New', Courier, monospace;
-    color: var(--main-color);
+    color: color-mix(
+        var(--main-color) 70%,
+        var(--background-color) 30%
+    );
+
+    &:hover {
+        color: color-mix(
+            var(--main-color) 80%,
+            var(--background-color) 20%
+        );
+    }
+
+    box-shadow: inset -1px -1px 2 3px var(--background-color);
 
     line-height: 1;
 
@@ -235,7 +254,7 @@ pre code {
     flex-direction: column;
     max-width: 60vw;
     max-height: 60vh;
-    overflow: hidden;
+    overflow: visible; /* so that resize icon (outside border) visible */
 
     * {
         min-height: 0;
@@ -253,7 +272,6 @@ pre code {
     .code-dropdown {
         flex: 1;
         min-height: 0;
-        overflow: scroll;
         display: flex;
         flex-direction: column;
 
@@ -266,14 +284,11 @@ pre code {
             min-height: 0;
             display: flex;
             flex-direction: column;
-            overflow: scroll;
-            /* background-color: var(--highlight-color); */
             
             code {
                 display: block;
                 flex: 1;
                 min-height: 0;
-                overflow: scroll;
             }
         }
     }

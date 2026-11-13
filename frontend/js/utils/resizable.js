@@ -15,8 +15,10 @@ export class Resizable {
         this.resizer = document.createElement('div');
         this.resizer.classList.add('resize-handle');
         this.resizer.textContent = "⤢";
+        
         this.resizer.style.top = 0;
         this.resizer.style.right = 0;
+        this.resizer.style.transform = "translate(-1px, 0)";
 
         this.resizer.hidden = (!this.isResizable);
         
@@ -31,13 +33,15 @@ export class Resizable {
         this.resizer.addEventListener('mousedown', (e) => {
             if (!this.isResizable) { return };
 
-            this.startResize.bind(this)
+            this.startResize(e);
         });
     };
 
     enable() {
-        this.isResizable = true;
         this.resizer.hidden = false;
+        
+        this.isResizable = true;
+        this.element.style.borderTopRightRadius = 0;
 
         this.width = this.width ?? this.element.offsetWidth;
         this.element.style.width = this.width;
@@ -45,26 +49,21 @@ export class Resizable {
         this.height = this.height ?? this.element.offsetHeight;
         this.element.style.height = this.height;
 
-        console.log(this.isResizable);
     };
 
     disable() {
-        this.isResizable = false;
         this.resizer.hidden = true;
-
-        console.log(this.isResizable);
+        
+        this.isResizable = false;
+        this.element.style.borderTopRightRadius = '';
     };
 
     fitContent() {
         this.element.style.width = `fit-content`;
         this.element.style.height = `fit-content`;
     };
+
+    startResize() {
+
+    }
 };
-
-const panel = document.getElementById('debug-panel')
-const handle = panel.querySelector('.resize-handle')
-
-const dropdown = panel.querySelector('.code-dropdown')
-const dataContainer = dropdown.querySelector('pre code')
-
-dataContainer.textContent = `'resizable.js' is linked`;
