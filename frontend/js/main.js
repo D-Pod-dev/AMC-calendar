@@ -128,8 +128,8 @@ const panelResizable = new Resizable(debugPanel,
     {
         isResizable: false, 
         minWidth: panelDimensions.width,
-        minHeight: panelDimensions.height + 30
-        // maxWidth: 
+        minHeight: panelDimensions.height + 30,
+        fitToWindow: true
     });
 
 dropdown.addEventListener('toggle', () => {
@@ -141,11 +141,6 @@ dropdown.addEventListener('toggle', () => {
         panelResizable.disable();
         panelResizable.fitContent();
     };
-});
-
-window.addEventListener('resize', () => {
-    panelResizable.initParams();
-    panelResizable.applyCSSBounds();
 });
 
 let bottomSpacer = document.createElement('div');

@@ -5,6 +5,7 @@ export class Resizable {
         this.isResizable = options.isResizable ?? true;
         
         this.startResize = this.startResize.bind(this)
+        this.windowResize = this.windowResize.bind(this)
         this.initParams()
         
         // init resizer
@@ -29,14 +30,18 @@ export class Resizable {
     initParams() {
         const options = this.options
         
-        const parentWidth = this.element.parentElement.offsetWidth;
-        const parentHeight = this.element.parentElement.offsetHeight;
+        this.fitToWindow = options.fitToWindow ?? False;
+
+        const parentWidth = (this.fitToWindow) ? window.innerWidth - 10: this.element.parentElement.offsetWidth;
+        const parentHeight = (this.fitToWindow) ? window.innerHeight - 10 : this.element.parentElement.offsetHeight;
 
         // init params
+
         this.minWidth = Math.min(parentWidth, options.minWidth ?? 100);
         this.minHeight = Math.min(parentHeight, options.minHeight ?? 100);
         this.maxWidth = Math.min(parentWidth, options.maxWidth ?? Infinity);
         this.maxHeight = Math.min(
+            (this.fitToWindow) ? parentHeight : 
             (parentHeight - this.minHeight < 50) 
                 ? window.innerHeight - 10
                 : parentHeight,
@@ -56,6 +61,12 @@ export class Resizable {
         this.element.style.minHeight = '';
         this.element.style.maxWidth = '';
         this.element.style.maxHeight = '';
+    };
+
+    windowResize() {
+        console.log('window resized');
+        this.initParams();
+        this.applyCSSBounds();
     };
 
     enable() {
@@ -83,6 +94,7 @@ export class Resizable {
             this.element.style.height = `${this.height}px`;
         };
 
+        window.addEventListener('resize', this.windowResize);
         this.applyCSSBounds();
 
         // start drag listener IF IS RESIZABLE
@@ -97,6 +109,7 @@ export class Resizable {
         this.isResizable = false;
         this.element.style.borderTopRightRadius = '';
 
+        window.removeEventListener('resize', this.windowResize);
         this.clearCSSBounds();
     };
 
@@ -138,8 +151,9 @@ export class Resizable {
             this.height = newHeight;
         };
 
-        const onUp = (upEvent) => {
-            document.removeEventListener('mousemove', onMove)
+        const onUp = () => {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp)
         }
 
         document.addEventListener('mousemove', onMove);
