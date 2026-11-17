@@ -48,10 +48,20 @@
 
 /* MAIN LAYOUT */
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Inter, Verdana, Geneva, Tahoma, sans-serif;
     color: var(--main-color);
     background-color: var(--background-color);
+
+    /* margin: 0; */
+
+    display: flex;
+    flex-direction: row;
+    /* gap: 0.5rem; */
 }    
 
 select, input, button {    
@@ -61,28 +71,58 @@ select, input, button {
     border-radius: 4px;
 }
 
+@media (max-width: 700px) {
+    #sidebar {
+
+    }
+}
+
 main {
     max-width: 1000px;
     margin: 0 auto;
+    padding: 8px;
+    flex: 1;
 }
 
-aside {
-    width: 900px;
-    /* position: float; */
+#infobar {
+    box-sizing: border-box;
+    width: 300px;
+    flex-shrink: 0;
+    /* margin: 8px 0; */
 
-    padding: 10px;
+    position: sticky;
+    top: 0;
+    right: 0;
+    height: calc(100vh - 16px);
+    align-self: flex-start;
+    
+    padding-top: 1rem;
     border-radius: 20px;
-
+    
     background-color: color-mix(
         in srgb,
-        var(--accent-color) 30%,
-        var(--background-color) 70%
-    );
+        var(--accent-color) 25%,
+        var(--background-color) 85%
+        );
     backdrop-filter: blur(5px);
 
-    * {
-        border: solid 1px var(--accent-color);
+    display: flex;
+    flex-direction: column;
+    
+    h2 {
+        flex-shrink: 0;
+        margin: 0 1rem;
     }
+    
+    section {
+        padding: 0.5rem 1.5rem;
+        flex: 1;
+        overflow: auto;
+    }
+
+    /* * {
+        border: solid 1px var(--accent-color);
+    } */
 }
 
 /* OUTLINE ON KEYBOARD FOCUS */
