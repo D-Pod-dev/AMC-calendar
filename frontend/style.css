@@ -71,11 +71,11 @@ select, input, button {
     border-radius: 4px;
 }
 
-@media (max-width: 700px) {
+/* @media (max-width: 700px) {
     #sidebar {
 
     }
-}
+} */
 
 main {
     max-width: 1000px;
@@ -84,10 +84,12 @@ main {
     flex: 1;
 }
 
+/* SIDEBAR */
+
 #infobar {
     box-sizing: border-box;
-    width: 300px;
-    flex-shrink: 0;
+    width: 400px;
+    
     /* margin: 8px 0; */
 
     position: sticky;
@@ -96,7 +98,7 @@ main {
     height: calc(100vh - 16px);
     align-self: flex-start;
     
-    padding-top: 1rem;
+    padding: 1rem;
     border-radius: 20px;
     
     background-color: color-mix(
@@ -111,11 +113,11 @@ main {
     
     h2 {
         flex-shrink: 0;
-        margin: 0 1rem;
+        margin: 0.5rem 0;
     }
     
     section {
-        padding: 0.5rem 1.5rem;
+        padding: 0 0.5rem;
         flex: 1;
         overflow: auto;
     }
@@ -164,6 +166,22 @@ a {
     
     :hover {
         color: var(--link-hover-color);
+    }
+}
+
+.fa-xmark {
+    border-radius: 100px;
+    cursor: pointer;
+    
+    padding: 1rem;
+    
+    
+    &:hover {
+        background-color: color-mix(
+            in srgb,
+            var(--main-color) 40%,
+            transparent
+        );
     }
 }
 
