@@ -18,6 +18,7 @@ export function displayStatus(statusCode) {
     };
 };
 
+// populates debug panel with info
 export function displayDebugData(data) {
     document.getElementById('theatre-debug-data').textContent = JSON.stringify(data, null, 2);
 };

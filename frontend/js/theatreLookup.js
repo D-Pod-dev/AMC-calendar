@@ -17,40 +17,55 @@ export function resetTheatreSearchButton() {
 }
 
 export function displayTheatreResults(theatres) {
-    const relevanceCutoff = 75
+    // minimum ratio value that defines what results are matches
+    const relevanceCutoff = 75;
     
     let resultsContainer = document.getElementById('theatre-results');
+    
     resultsContainer.innerHTML = 
         "<h2>Theatre Results:</h2>"
         +"<ol id='theatre-list'>"
         +theatres.map((theatre, index) =>     
-            (
-                (index === 0 && theatre.ratio <= relevanceCutoff)
-                ? (`<p style='margin-left: 1rem;'>No perfect matches. (`
-                    +`<span class="refocus" id="focus-search-by-input" tabindex="0"`
-                    +` onclick="document.getElementById('search-by-input').focus();"`
-                    +`>Maybe try changing the search filter?</span>)</p>`)
+            ( // if the first result's ratio is less than the relevance cutoff - no perfect matches
+                (index === 0 && theatre.ratio <= relevanceCutoff) ?
+
+                (`<p style='margin-left: 1rem;'>No perfect matches.`+
+                    // make an element that will suggest changing search-by term and refocus to it on click
+                    `(<span class="refocus" id="focus-search-by-input" tabindex="0"
+                        onclick="document.getElementById('search-by-input').focus();"
+                        >Maybe try changing the search filter?</span>)
+                    </p>`
+                )
+                
                 : ""
             )    
-            +(
+            +
+            ( // dropdown containing non-matches rendered before first non-matching result
                 (theatre.ratio <= relevanceCutoff && 
-                (index === 0 || theatres[index-1].ratio > relevanceCutoff))
-                ? ("<details id='less-relevant-theatre-results'>"
-                    +`<summary>Less relevant results (${theatres.length-index}) - click to show/hide</summary>`
-                    +"<div>") 
+                (index === 0 || theatres[index-1].ratio > relevanceCutoff)) ?
+
+                (`<details id='less-relevant-theatre-results'>
+                    <summary>Less relevant results (${theatres.length-index}) - click to show/hide</summary>`
+                )
+                
                 : ""
             )
-            +"<li>"
-            +`<b><a href="${theatre.url}">${theatre.title}</a></b> - ${theatre.city[0].toUpperCase()+theatre.city.slice(1).toLowerCase()}`
-            +"</li>"
-            +(
-                (index === theatres.length-1 && theatre.ratio <= 60)
-                ? "</div></details>"
+            + // render theater result (this iterates through results, remember?)
+            `<li>
+                <b><a href="${theatre.url}">${theatre.title}</a></b>
+                 - 
+                ${theatre.city[0].toUpperCase()+theatre.city.slice(1).toLowerCase()}
+            </li>`
+            +
+            ( // close less relevant results details if it's the last result AND there were imperfect matches
+                (index === theatres.length-1 && theatre.ratio <= 60) ?
+                "</details>"
                 : ""
             )
         ).join('')
         +"</ol>";
 
+        // make the search-by refocus keyboard accessible
         document.getElementById('focus-search-by-input')?.addEventListener('keydown', function(e) {
             if (e.key === "Enter") {
                 this.click();

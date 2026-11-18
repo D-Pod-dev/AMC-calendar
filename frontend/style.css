@@ -422,7 +422,7 @@ pre {
                 padding-top: 0.5rem;
             }
             
-            div {
+            &::details-content {
                 padding-left: 0;
                 margin-top: 0;
 

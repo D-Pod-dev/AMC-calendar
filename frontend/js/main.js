@@ -35,7 +35,4 @@ dropdown.addEventListener('toggle', () => {
     };
 });
 
-let bottomSpacer = document.createElement('div');
-bottomSpacer.id = 'bottom-spacer';
-bottomSpacer.style.height = `${panelDimensions.height}px`;
-document.querySelector('body').appendChild(bottomSpacer);
+document.querySelector('main').style.paddingBottom = `${panelDimensions.height}px`

@@ -4,11 +4,12 @@ export class Resizable {
         this.options = options;
         this.isResizable = options.isResizable ?? true;
         
+        // bind methods
         this.startResize = this.startResize.bind(this)
         this.windowResize = this.windowResize.bind(this)
         this.initParams()
         
-        // init resizer
+        // init resizer handle
         this.resizer = document.createElement('div');
         this.resizer.classList.add('resize-handle');
         this.resizer.textContent = "⤢";
@@ -21,7 +22,7 @@ export class Resizable {
         
         element.appendChild(this.resizer);
         
-        // enable
+        // enable resizable
         if (this.isResizable) {
             this.enable();
         };
@@ -36,7 +37,6 @@ export class Resizable {
         const parentHeight = (this.fitToWindow) ? window.innerHeight - 10 : this.element.parentElement.offsetHeight;
 
         // init params
-
         this.minWidth = Math.min(parentWidth, options.minWidth ?? 100);
         this.minHeight = Math.min(parentHeight, options.minHeight ?? 100);
         this.maxWidth = Math.min(parentWidth, options.maxWidth ?? Infinity);
@@ -50,6 +50,7 @@ export class Resizable {
     };
     
     applyCSSBounds() {
+        // set css max & min dimensions to match
         this.element.style.minWidth = `${this.minWidth}px`;
         this.element.style.minHeight = `${this.minHeight}px`;
         this.element.style.maxWidth = `${this.maxWidth}px`;
@@ -57,6 +58,7 @@ export class Resizable {
     };
 
     clearCSSBounds() {
+        // remove css bounds
         this.element.style.minWidth = ''
         this.element.style.minHeight = '';
         this.element.style.maxWidth = '';
@@ -64,14 +66,12 @@ export class Resizable {
     };
 
     windowResize() {
-        console.log('window resized');
+        // called on window resize
         this.initParams();
         this.applyCSSBounds();
     };
 
     enable() {
-        console.log('resizability enabled')
-
         this.isResizable = true;
         
         // resizer styling
@@ -94,22 +94,25 @@ export class Resizable {
             this.element.style.height = `${this.height}px`;
         };
 
+        // add window resize listener
         window.addEventListener('resize', this.windowResize);
         this.applyCSSBounds();
 
-        // start drag listener IF IS RESIZABLE
+        // start resizing listener
         this.resizer.addEventListener('mousedown', this.startResize);
     };
 
     disable() {
-        this.resizer.hidden = true;
-
-        this.resizer.removeEventListener('mousedown', this.startResize);
-        
         this.isResizable = false;
+        
+        // remove visual indicators
+        this.resizer.hidden = true;
         this.element.style.borderTopRightRadius = '';
-
+        
+        // remove window resize and resize handle listeners
+        this.resizer.removeEventListener('mousedown', this.startResize);
         window.removeEventListener('resize', this.windowResize);
+        
         this.clearCSSBounds();
     };
 
@@ -132,11 +135,11 @@ export class Resizable {
         // get pre-drag state
         const startX = e.clientX;
         const startY = e.clientY;
-
         const elementDimensions = this.element.getBoundingClientRect()
         const startWidth = elementDimensions.width;
         const startHeight = elementDimensions.height;
         
+        // calculate dragged difference and apply new dimensions
         const onMove = (moveEvent) => {
             const dx = moveEvent.clientX - startX;
             const newWidth = this.clampWidth(startWidth + dx);
@@ -147,10 +150,12 @@ export class Resizable {
             this.element.style.width = `${newWidth}px`
             this.element.style.height = `${newHeight}px`
             
+            // save width state
             this.width = newWidth;
             this.height = newHeight;
         };
 
+        // remove event listeners when dragging is stopped
         const onUp = () => {
             document.removeEventListener('mousemove', onMove);
             document.removeEventListener('mouseup', onUp)
