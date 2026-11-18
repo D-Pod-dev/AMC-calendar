@@ -29,7 +29,7 @@ export function displayTheatreResults(theatres) {
             ( // if the first result's ratio is less than the relevance cutoff - no perfect matches
                 (index === 0 && theatre.ratio <= relevanceCutoff) ?
 
-                (`<p style='margin-left: 1rem;'>No perfect matches.`+
+                (`<p style='margin-left: 1rem;'>No perfect matches. `+
                     // make an element that will suggest changing search-by term and refocus to it on click
                     `(<span class="refocus" id="focus-search-by-input" tabindex="0"
                         onclick="document.getElementById('search-by-input').focus();"
@@ -51,11 +51,11 @@ export function displayTheatreResults(theatres) {
                 : ""
             )
             + // render theater result (this iterates through results, remember?)
-            `<li>
+            `<li><button>
                 <b><a href="${theatre.url}">${theatre.title}</a></b>
                  - 
                 ${theatre.city[0].toUpperCase()+theatre.city.slice(1).toLowerCase()}
-            </li>`
+            </button></li>`
             +
             ( // close less relevant results details if it's the last result AND there were imperfect matches
                 (index === theatres.length-1 && theatre.ratio <= 60) ?

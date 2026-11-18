@@ -66,9 +66,14 @@ body {
 
 select, input, button {    
     font: inherit;
+    font-size: inherit;
     color: inherit;
     background-color: inherit;
     border-radius: 4px;
+}
+
+select, button {
+    cursor: pointer;
 }
 
 /* @media (max-width: 700px) {
@@ -408,6 +413,11 @@ pre {
         
         li {
             margin-left: 2rem;
+
+            button {
+                border: none;
+                margin: 0;
+            }
         }
         
         #less-relevant-theatre-results {
