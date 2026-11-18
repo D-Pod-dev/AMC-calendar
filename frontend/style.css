@@ -20,24 +20,24 @@
     --secondary-color: color-mix(
         in srgb,
         var(--main-color) 90%,
-        var(--background-color) 10%
+        var(--background-color)
     );    
     --link-color: color-mix(
         in srgb,
         var(--accent-color) 50%,
-        var(--main-color) 50%
+        var(--main-color)
     );    
     
     /* interaction colors */
     --focus-glow-color: color-mix(
         in srgb,
         var(--accent-color) 70%,
-        var(--main-color) 30%
+        var(--main-color)
     );    
     --link-hover-color: color-mix(
         in srgb,
         var(--accent-color) 80%,
-        var(--main-color) 20%
+        var(--main-color)
     );    
 
     /* code colors */
@@ -84,9 +84,13 @@ main {
     flex: 1;
 }
 
-/* SIDEBAR */
+/* INFOBAR */
 
 #infobar {
+    &[hidden] {
+        display: none;
+    }
+
     box-sizing: border-box;
     width: 400px;
     
@@ -103,8 +107,8 @@ main {
     
     background-color: color-mix(
         in srgb,
-        var(--accent-color) 25%,
-        var(--background-color) 85%
+        var(--accent-color) 22.5%,
+        var(--background-color)
         );
     backdrop-filter: blur(5px);
 
@@ -112,14 +116,18 @@ main {
     flex-direction: column;
     
     h2 {
-        flex-shrink: 0;
         margin: 0.5rem 0;
+        flex-shrink: 0;
     }
     
     section {
         padding: 0 0.5rem;
         flex: 1;
         overflow: auto;
+
+        p {
+            margin: 0;
+        }
     }
 
     /* * {
@@ -169,19 +177,29 @@ a {
     }
 }
 
-.fa-xmark {
+.close-button {
+    border: none;
+    padding: 0;
+
+    width: 2rem;
+    height: 2rem;
+    
     border-radius: 100px;
     cursor: pointer;
-    
-    padding: 1rem;
-    
-    
+
     &:hover {
         background-color: color-mix(
             in srgb,
-            var(--main-color) 40%,
+            var(--main-color) 20%,
             transparent
         );
+
+    .fa-solid.fa-xmark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;    
+        
+        }
     }
 }
 
@@ -271,7 +289,7 @@ pre {
         background-color: color-mix(
             in srgb,
             var(--code-color) 20%,
-            var(--code-background-color) 80%
+            var(--code-background-color)
         );
     }    
 
@@ -293,13 +311,13 @@ pre {
     font-family: Consolas, 'Courier New', Courier, monospace;
     color: color-mix(
         var(--main-color) 70%,
-        var(--background-color) 30%
+        var(--background-color)
     );
 
     &:hover {
         color: color-mix(
             var(--main-color) 80%,
-            var(--background-color) 20%
+            var(--background-color)
         );
     }
 
@@ -323,8 +341,8 @@ pre {
     border-radius: 10px;
     box-shadow: inset 0 0 15px 2px color-mix(
         in srgb,
-        var(--code-background-color) 72.5%,
-        var(--code-color) 22.5%
+        var(--code-background-color) 80%,
+        var(--code-color)
     );
     backdrop-filter: blur(3px);
     
@@ -410,7 +428,7 @@ pre {
                 border-left: 2px solid color-mix(
                     in srgb,
                     var(--main-color) 60%,
-                    var(--background-color) 40%
+                    var(--background-color)
                 );
             }
         }
