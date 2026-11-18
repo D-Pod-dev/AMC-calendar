@@ -68,7 +68,7 @@ select, input, button {
     font: inherit;
     font-size: inherit;
     color: inherit;
-    background-color: inherit;
+    background-color: transparent;
     border-radius: 4px;
 }
 

@@ -1,8 +1,10 @@
-import { lookupTheatres } from './theatreLookup.js';
+import { lookupTheatres, populateTheatreSidebar } from './theatreLookup.js';
 import { Resizable } from './utils/resizable.js';
 import { displayStatus, displayDebugData } from './utils/dataDisplay.js';
 
 window.lookupTheatres = lookupTheatres;
+window.populateTheatreSidebar = populateTheatreSidebar;
+window.displayDebugData = displayDebugData;
 
 // make enter key submit search
 document.getElementById('query-input').addEventListener('keydown', (event) => {

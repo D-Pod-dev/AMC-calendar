@@ -5,7 +5,7 @@ import requests
 from rapidfuzz import fuzz
 
 SITEMAP_THEATRES_XML = None
-theatres_dict = None
+theatres_list = None
 
 def print_xml(xml):
     if type(xml) == str:
@@ -15,7 +15,7 @@ def print_xml(xml):
         # print(minidom.parseString(ET.tostring(xml, encoding="unicode")).toprettyxml(indent=" "*2))
 
 def lookup_theatres(query: str, search_by:str = "city", count: int = 10):
-    global SITEMAP_THEATRES_XML, theatres_dict
+    global SITEMAP_THEATRES_XML, theatres_list
 
     # load theatres if not loaded yet
     if SITEMAP_THEATRES_XML is None:
@@ -26,7 +26,7 @@ def lookup_theatres(query: str, search_by:str = "city", count: int = 10):
             if "{" in e.tag:
                 e.tag = e.tag.split("}", 1)[1]
 
-        theatres_dict = [{"url": url[0].text, **{attr.get("name"): attr.text for attr in url.findall(".//Attribute")}} for url in SITEMAP_THEATRES_XML]
+        theatres_list = [{"url": url[0].text, **{attr.get("name"): attr.text for attr in url.findall(".//Attribute")}} for url in SITEMAP_THEATRES_XML]
 
     if search_by == "name":
         search_by = "title"
@@ -35,11 +35,16 @@ def lookup_theatres(query: str, search_by:str = "city", count: int = 10):
         ({
             "ratio": fuzz.token_set_ratio(query.lower(),
             theatre[search_by].lower()), **theatre
-        } for theatre in theatres_dict),
+        } for theatre in theatres_list),
 
         key=lambda theatre: theatre["ratio"],
             reverse=True)
 
     return matches[:count]
 
-# print_xml(get_theatre_list())
+def get_theatre(theatre_id: str):
+    for theatre in theatres_list:
+        if theatre['theatreId'] == str(theatre_id):
+            return theatre
+
+    return None

@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.exceptions import HTTPException
 from requests.exceptions import HTTPError
 
-from ..theatre_lookup.lookup_theatres import *
+from ..theatre_lookup.lookup_theatres import lookup_theatres
 
 router = APIRouter()
 
@@ -17,6 +17,16 @@ async def theatre_lookup(query:str, searchBy:str, resultCount:int = 10):
             status_code=e.response.status_code,
             detail=str(e)
         )
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
+
+@router.get("/api/get-theatre-by-id")
+async def get_theatre_by_id(theatre_id:int):
+    try:
+        return get_theatre_by_id(theatre_id)
     except Exception as e:  # noqa: BLE001
         raise HTTPException(
             status_code=500,

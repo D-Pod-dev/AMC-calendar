@@ -16,6 +16,15 @@ export function resetTheatreSearchButton() {
     searchButton.textContent = defaultTheatreSearchButtonText;
 }
 
+export async function populateTheatreSidebar(theatreId) {
+    const theatreSidebar = document.getElementById('infobar');
+    const theatre = await fetch(`/api/get-theatre-by-id?${new URLSearchParams({ theatreId })}`);
+    displayDebugData(theatre)
+    theatreSidebar.hidden = false;
+
+    theatreSidebar.querySelector('h2').textContent = theatre.title;
+};
+
 export function displayTheatreResults(theatres) {
     // minimum ratio value that defines what results are matches
     const relevanceCutoff = 75;
@@ -51,8 +60,8 @@ export function displayTheatreResults(theatres) {
                 : ""
             )
             + // render theater result (this iterates through results, remember?)
-            `<li><button>
-                <b><a href="${theatre.url}">${theatre.title}</a></b>
+            `<li><button onclick="populateTheatreSidebar(${theatre.id});">
+                <b>${theatre.title}</b>
                  - 
                 ${theatre.city[0].toUpperCase()+theatre.city.slice(1).toLowerCase()}
             </button></li>`
