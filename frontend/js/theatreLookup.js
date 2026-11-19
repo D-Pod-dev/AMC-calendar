@@ -18,12 +18,20 @@ export function resetTheatreSearchButton() {
 
 export async function populateTheatreSidebar(theatreId) {
     const theatreSidebar = document.getElementById('infobar');
-    const theatre = await fetch(`/api/get-theatre-by-id?${new URLSearchParams({ theatreId })}`);
+    const response = await fetch(`/api/get-theatre-by-id?${new URLSearchParams({ theatreId })}`);
+    const theatre = await response.json();
+    console.log(theatre)
     displayDebugData(theatre)
     theatreSidebar.hidden = false;
 
     theatreSidebar.querySelector('h2').textContent = theatre.title;
 };
+
+function capitalCase(str) {
+    return str.split(' ').map((word) => 
+        word[0].toUpperCase() + word.slice(1).toLowerCase()
+    ).join(' ');
+}
 
 export function displayTheatreResults(theatres) {
     // minimum ratio value that defines what results are matches
@@ -60,10 +68,10 @@ export function displayTheatreResults(theatres) {
                 : ""
             )
             + // render theater result (this iterates through results, remember?)
-            `<li><button onclick="populateTheatreSidebar(${theatre.id});">
+            `<li><button onclick="populateTheatreSidebar(${theatre.theatreId});">
                 <b>${theatre.title}</b>
                  - 
-                ${theatre.city[0].toUpperCase()+theatre.city.slice(1).toLowerCase()}
+                ${capitalCase(theatre.city)}
             </button></li>`
             +
             ( // close less relevant results details if it's the last result AND there were imperfect matches

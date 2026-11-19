@@ -27,7 +27,7 @@ const panelResizable = new Resizable(debugPanel,
     });
 
 dropdown.addEventListener('toggle', () => {
-    console.log('dropdown toggled');
+    // console.log('dropdown toggled');
     
     if (dropdown.open) {
         panelResizable.enable();

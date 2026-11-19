@@ -82,11 +82,11 @@ export class Resizable {
         if (typeof (this.width && this.height) === 'undefined') {
             if (typeof this.width === 'undefined') {
                 this.width = this.clampWidth(this.element.offsetWidth)
-                console.log(`'this.width' logged: ${this.width}`)
+                // console.log(`'this.width' logged: ${this.width}`)
             };
             if (typeof this.height === 'undefined') {
                 this.height = this.clampHeight(this.element.offsetHeight)
-                console.log(`'this.height' logged: ${this.height}`)
+                // console.log(`'this.height' logged: ${this.height}`)
             };
         } else {
             // set dimensions to last checkpoint

@@ -42,9 +42,11 @@ def lookup_theatres(query: str, search_by:str = "city", count: int = 10):
 
     return matches[:count]
 
-def get_theatre(theatre_id: str):
+def get_theatre(theatre_id):
     for theatre in theatres_list:
         if theatre['theatreId'] == str(theatre_id):
+            print(theatre)
             return theatre
 
+    print('returning None')
     return None
