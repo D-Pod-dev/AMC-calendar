@@ -20,11 +20,15 @@ export async function populateTheatreSidebar(theatreId) {
     const theatreSidebar = document.getElementById('infobar');
     const response = await fetch(`/api/get-theatre-by-id?${new URLSearchParams({ theatreId })}`);
     const theatre = await response.json();
-    console.log(theatre)
+    
     displayDebugData(theatre)
     theatreSidebar.hidden = false;
 
     theatreSidebar.querySelector('h2').textContent = theatre.title;
+    document.getElementById('select-theatre-button').onclick = () => {
+        localStorage.setItem("selectedTheatre", JSON.stringify(theatre));
+        console.log(JSON.parse(localStorage.getItem('selectedTheatre')).title);
+    };
 };
 
 function capitalCase(str) {
