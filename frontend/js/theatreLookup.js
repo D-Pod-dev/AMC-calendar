@@ -18,17 +18,28 @@ export function resetTheatreSearchButton() {
 
 export async function populateTheatreSidebar(theatreId) {
     const theatreSidebar = document.getElementById('infobar');
+    const header = theatreSidebar.querySelector('header');
+    const dataContainer = theatreSidebar.querySelector('section');
+    const dataTemplate = theatreSidebar.querySelector('#theatre-info-template').content.cloneNode(true);
+
+    theatreSidebar.hidden = false;
+    // dataContainer.textContent = '';
+    
     const response = await fetch(`/api/get-theatre-by-id?${new URLSearchParams({ theatreId })}`);
     const theatre = await response.json();
-    
     displayDebugData(theatre)
-    theatreSidebar.hidden = false;
 
-    theatreSidebar.querySelector('h2').textContent = theatre.title;
-    document.getElementById('select-theatre-button').onclick = () => {
+    header.querySelector('h2').textContent = theatre.title;
+    header.querySelector('#amc-link').href = theatre.url;
+
+    const address = `${theatre.addressLine1}, ${capitalCase(theatre.city)}, ${theatre.state}`;
+    dataTemplate.querySelector('#address').textContent = address;
+    dataTemplate.querySelector('#select-theatre-button').onclick = () => {
         localStorage.setItem("selectedTheatre", JSON.stringify(theatre));
         console.log(JSON.parse(localStorage.getItem('selectedTheatre')).title);
     };
+
+    dataContainer.append(dataTemplate);
 };
 
 function capitalCase(str) {

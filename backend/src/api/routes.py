@@ -25,7 +25,6 @@ async def theatre_lookup(query:str, searchBy:str, resultCount:int = 10):
 
 @router.get("/api/get-theatre-by-id")
 async def get_theatre_by_id(theatreId):
-    print(theatreId)
     try:
         return get_theatre(theatreId)
     except Exception as e:  # noqa: BLE001
