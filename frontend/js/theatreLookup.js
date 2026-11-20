@@ -23,12 +23,12 @@ export async function populateTheatreSidebar(theatreId) {
     const dataTemplate = theatreSidebar.querySelector('#theatre-info-template').content.cloneNode(true);
 
     theatreSidebar.hidden = false;
-    // dataContainer.textContent = '';
     
     const response = await fetch(`/api/get-theatre-by-id?${new URLSearchParams({ theatreId })}`);
     const theatre = await response.json();
     displayDebugData(theatre)
-
+    
+    dataContainer.innerHTML = '';
     header.querySelector('h2').textContent = theatre.title;
     header.querySelector('#amc-link').href = theatre.url;
 
