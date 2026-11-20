@@ -16,6 +16,15 @@ export function resetTheatreSearchButton() {
     searchButton.textContent = defaultTheatreSearchButtonText;
 }
 
+export function updateSelectedTheatreDisplay() {
+    const selectedTheatre = JSON.parse(localStorage.getItem('selectedTheatre'));
+    
+    document.getElementById('selected-theatre-message').innerHTML = 
+        (selectedTheatre !== null) ? 
+        `<b>Theatre:</b> ${selectedTheatre.title}`
+        : 'No theatre selected yet.';
+};
+
 export async function populateTheatreSidebar(theatreId) {
     const theatreSidebar = document.getElementById('infobar');
     const header = theatreSidebar.querySelector('header');
@@ -34,9 +43,11 @@ export async function populateTheatreSidebar(theatreId) {
 
     const address = `${theatre.addressLine1}, ${capitalCase(theatre.city)}, ${theatre.state}`;
     dataTemplate.querySelector('#address').textContent = address;
+    
     dataTemplate.querySelector('#select-theatre-button').onclick = () => {
         localStorage.setItem("selectedTheatre", JSON.stringify(theatre));
         console.log(JSON.parse(localStorage.getItem('selectedTheatre')).title);
+        updateSelectedTheatreDisplay();
     };
 
     dataContainer.append(dataTemplate);

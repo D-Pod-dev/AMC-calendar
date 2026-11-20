@@ -11,7 +11,12 @@
 <body>
     <main>
         <h1>AMC Calendar</h1>
-        <div id="theatre-lookup">
+        <div id="selected-theatre-status">
+            <p id="selected-theatre-message"></p>
+            <button onclick="document.getElementById('theatre-lookup').hidden = false;">Select a Theatre</button>
+        </div>
+
+        <section id="theatre-lookup" hidden>
             <label for="query-input">Search for a theatre by
                 <select name="search-by" id="search-by-input" onchange="document.getElementById('query-input').placeholder=`Enter theatre ${document.getElementById('search-by-input').value}`">
                     <option value="city">city</option>
@@ -27,7 +32,7 @@
             </details>
             <hr>
             <section id="theatre-results"></section>
-        </div>    
+        </section>    
     </main>
 
     <aside id="infobar" hidden>
@@ -50,7 +55,7 @@
         
         <template id="theatre-info-template">
             <p><b>Address:</b> <span id="address"></span></p>
-            <button id="select-theatre-button">Select Theatre</button>
+            <button id="select-theatre-button">Select This Theatre</button>
             <!-- <details>
                 <summary>Scrollable Content</summary>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dictum, leo vitae lacinia fringilla, mauris ligula suscipit risus, eget maximus sapien sapien egestas risus. In rutrum nisl eget ipsum interdum, eget hendrerit neque porta. Praesent rhoncus magna non odio interdum, at vulputate nisi finibus. Ut rutrum aliquet sollicitudin. Nunc id urna ut nisl tristique porta. Sed consequat lectus metus, ultricies ultrices ipsum blandit vel. Praesent luctus consequat lectus, mollis tempor massa ullamcorper vitae. Mauris in dapibus urna. In accumsan pellentesque libero, ut elementum sem pretium eu. Nulla quis orci commodo, blandit metus eget, ultrices quam. Nunc sodales quam vitae lacus tristique, sit amet hendrerit erat tincidunt. Mauris lobortis, velit non malesuada ultricies, risus nulla ultricies quam, at egestas nulla turpis vitae metus. Duis a pharetra augue. Aliquam ultricies mauris tellus, ac volutpat erat ornare a. Praesent scelerisque bibendum ipsum ac tincidunt. Morbi gravida commodo efficitur. Sed sagittis ante eu justo ullamcorper euismod. Aenean bibendum sit amet leo vitae luctus. Integer gravida, enim quis dapibus tempus, elit orci ornare odio, sit amet convallis quam orci et nisl. Phasellus pellentesque urna in hendrerit molestie.</p>    

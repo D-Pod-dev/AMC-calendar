@@ -1,4 +1,4 @@
-import { lookupTheatres, populateTheatreSidebar } from './theatreLookup.js';
+import { lookupTheatres, populateTheatreSidebar, updateSelectedTheatreDisplay } from './theatreLookup.js';
 import { Resizable } from './utils/resizable.js';
 import { displayStatus, displayDebugData } from './utils/dataDisplay.js';
 
@@ -38,3 +38,5 @@ dropdown.addEventListener('toggle', () => {
 });
 
 document.querySelector('main').style.paddingBottom = `${panelDimensions.height}px`
+
+updateSelectedTheatreDisplay();
