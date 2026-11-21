@@ -296,7 +296,7 @@ a {
             in srgb,
             var(--main-color) 20%,
             transparent
-        );
+        ) !important;
 
     .fa-solid.fa-xmark {
         display: inline-flex;
