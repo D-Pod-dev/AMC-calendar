@@ -536,6 +536,9 @@ pre {
             margin-left: 2rem;
 
             button {
+                display: block;
+                text-align: left;
+                
                 background-color: transparent;
                 border: none;
                 margin: 0;
