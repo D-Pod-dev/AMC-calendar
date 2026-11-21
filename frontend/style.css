@@ -503,6 +503,7 @@ pre {
 #theatre-lookup {
     position: relative;    
     border-radius: 20px;
+    border-top: solid 2px var(--accent-color);
     margin-top: 0.5rem;
     padding: 1rem;
 
