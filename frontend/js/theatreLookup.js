@@ -20,9 +20,11 @@ export function updateSelectedTheatreDisplay() {
     const selectedTheatre = JSON.parse(localStorage.getItem('selectedTheatre'));
     
     document.getElementById('selected-theatre-message').innerHTML = 
-        (selectedTheatre !== null) ? 
-        `<b>Theatre:</b> ${selectedTheatre.title}`
-        : 'No theatre selected yet.';
+    (selectedTheatre !== null) ? 
+    `<b>Theatre:</b> ${selectedTheatre.title}`
+    : 'No theatre selected yet.';
+
+    if (selectedTheatre === null) { document.getElementById('open-theatre-lookup-button').focus(); };
 };
 
 export async function populateTheatreSidebar(theatreId) {
@@ -117,7 +119,7 @@ export function displayTheatreResults(theatres) {
 }
 
 export async function lookupTheatres() {
-    let query = document.getElementById('query-input').value;
+    let query = document.getElementById('theatre-query-input').value;
     let searchBy = document.getElementById('search-by-input').value;
     let resultCount = document.getElementById('theatre-result-count').value;
 

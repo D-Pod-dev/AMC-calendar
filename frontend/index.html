@@ -12,18 +12,26 @@
     <main>
         <h1>AMC Calendar</h1>
         <div id="selected-theatre-status">
-            <p id="selected-theatre-message"></p>
-            <button onclick="document.getElementById('theatre-lookup').hidden = false;">Select a Theatre</button>
+            <label for="open-theatre-lookup-button" id="selected-theatre-message">Loading theatre...</label>
+            <button id="open-theatre-lookup-button" onclick="
+                document.getElementById('theatre-lookup').hidden=false;
+                document.getElementById('theatre-query-input').focus();
+            ">
+                Select a Theatre</button>
         </div>
 
         <section id="theatre-lookup" hidden>
-            <label for="query-input">Search for a theatre by
-                <select name="search-by" id="search-by-input" onchange="document.getElementById('query-input').placeholder=`Enter theatre ${document.getElementById('search-by-input').value}`">
+            <button class="close-button" onclick="document.getElementById('theatre-lookup').hidden=true;">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <label for="theatre-query-input">Search for a theatre by
+                <select id="search-by-input" onchange="document.getElementById('theatre-query-input').placeholder=`Enter theatre ${document.getElementById('search-by-input').value}`">
                     <option value="city">city</option>
                     <option value="name">name</option>
                 </select>:
             </label>
-            <input id="query-input" name="query" type="text" placeholder='Enter theatre city' autofocus>
+            <input id="theatre-query-input" type="text" placeholder='Enter theatre city'>
             <button id="theatre-search-button" onclick="lookupTheatres()">Search</button>
             <details id="theatre-lookup-options">
                 <summary>Advanced options</summary>
@@ -36,13 +44,7 @@
     </main>
 
     <aside id="infobar" hidden>
-        <button class="close-button" 
-                style="
-                    position: fixed; 
-                    right: 1rem; 
-                    top: 1rem;"
-                onclick="document.getElementById('infobar').hidden=true;"
-            >
+        <button class="close-button" onclick="document.getElementById('infobar').hidden=true;">
             <i class="fa-solid fa-xmark"></i>
         </button>
 

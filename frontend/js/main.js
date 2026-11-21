@@ -7,7 +7,7 @@ window.populateTheatreSidebar = populateTheatreSidebar;
 window.displayDebugData = displayDebugData;
 
 // make enter key submit search
-document.getElementById('query-input').addEventListener('keydown', (event) => {
+document.getElementById('theatre-query-input').addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         lookupTheatres();
     };
