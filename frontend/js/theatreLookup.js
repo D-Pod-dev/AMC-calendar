@@ -53,6 +53,8 @@ export async function populateTheatreSidebar(theatreId) {
     };
 
     dataContainer.append(dataTemplate);
+
+    theatreSidebar.querySelector('.close-button').focus()
 };
 
 function capitalCase(str) {

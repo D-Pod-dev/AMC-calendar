@@ -21,7 +21,12 @@
         in srgb,
         var(--main-color) 90%,
         var(--background-color)
-    );    
+    );
+    --disabled-color: color-mix(
+        in srgb,
+        var(--main-color) 70%,
+        var(--background-color)
+    );
     --link-color: color-mix(
         in srgb,
         var(--accent-color) 50%,
@@ -207,7 +212,7 @@ button:enabled:hover, button:enabled:focus-visible {
     background-color: color-mix(
         in srgb,
         var(--main-color) 15%,
-        transparent
+        var(--background-color)
     );
     border-color: color-mix(
         in srgb,
@@ -261,6 +266,13 @@ a {
         line-height: 1;
         position: relative;
         top: -0.1em;
+    }
+
+    &[aria-disabled="true"] {
+        color: var(--disabled-color);
+        border-color: var(--disabled-color);
+        cursor: not-allowed;
+        pointer-events: none;
     }
 }
 
