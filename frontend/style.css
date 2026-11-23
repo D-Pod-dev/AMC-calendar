@@ -208,6 +208,10 @@ select {
     background-color: var(--background-color);
 }
 
+button {
+    margin-left: 0.25rem;
+}
+
 button:enabled:hover, button:enabled:focus-visible {
     background-color: color-mix(
         in srgb,
