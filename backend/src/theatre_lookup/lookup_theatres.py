@@ -14,19 +14,25 @@ def print_xml(xml):
         ET.dump(xml)
         # print(minidom.parseString(ET.tostring(xml, encoding="unicode")).toprettyxml(indent=" "*2))
 
+def fetch_theatre_list():
+    global SITEMAP_THEATRES_XML, theatres_list
+    
+    SITEMAP_THEATRES_XML = ET.fromstring(requests.get("https://www.amctheatres.com/sitemaps/sitemap-theatres.xml").text)
+    ET.indent(SITEMAP_THEATRES_XML, space=" "*2)
+
+    for e in SITEMAP_THEATRES_XML.iter():
+        if "{" in e.tag:
+            e.tag = e.tag.split("}", 1)[1]
+
+    theatres_list = [{"url": url[0].text, **{attr.get("name"): attr.text for attr in url.findall(".//Attribute")}} for url in SITEMAP_THEATRES_XML]
+
+
 def lookup_theatres(query: str, search_by:str = "city", count: int = 10):
     global SITEMAP_THEATRES_XML, theatres_list
 
     # load theatres if not loaded yet
     if SITEMAP_THEATRES_XML is None:
-        SITEMAP_THEATRES_XML = ET.fromstring(requests.get("https://www.amctheatres.com/sitemaps/sitemap-theatres.xml").text)
-        ET.indent(SITEMAP_THEATRES_XML, space=" "*2)
-
-        for e in SITEMAP_THEATRES_XML.iter():
-            if "{" in e.tag:
-                e.tag = e.tag.split("}", 1)[1]
-
-        theatres_list = [{"url": url[0].text, **{attr.get("name"): attr.text for attr in url.findall(".//Attribute")}} for url in SITEMAP_THEATRES_XML]
+        fetch_theatre_list()
 
     if search_by == "name":
         search_by = "title"
